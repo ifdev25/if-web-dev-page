@@ -101,13 +101,13 @@ nav {
   left: 0;
   right: 0;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
-  clip-path: circle(0px at calc(100% - 45px) 40px);
+  clip-path: circle(0px at calc(100% - 28px) 36px);
   transform: translateZ(0);
   transition: all 0.3s ease-in-out;
 }
@@ -121,19 +121,26 @@ nav {
 .menu-btn {
   position: absolute;
   z-index: 10000 !important;
-  right: 20px;
-  top: 35px;
-  height: 50px;
-  width: 50px;
-  text-align: center;
-  line-height: 0px;
+  /* cale dans le coin : l'icone affleure le haut du logo (nav py-4 = 16px) et le bord droit */
+  top: 8px;
+  right: 0;
+  height: 68px;
+  width: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
   border-radius: 50%;
-  font-size: 30px;
   border: transparent;
   color: whitesmoke;
   cursor: pointer;
   background-color: transparent;
   transition: all 0.3s ease-in-out;
+}
+.menu-btn svg {
+  width: 48px;
+  height: 48px;
+  stroke-width: 2.5;
 }
 .menu-btn.appear {
   position: fixed;
@@ -282,8 +289,14 @@ a.nav-link:hover {
   border: 3px solid whitesmoke !important;
   cursor: pointer;
 }
+/* Bloc d'intro placé avant le titre de section : espace haut = espace bas */
 .ad {
+  padding-top: 50px;
   padding-bottom: 50px;
+}
+/* Compétences : le divider SVG du hero fait déjà le retrait haut */
+#skills .ad {
+  padding-top: 0;
 }
 
 /* ---- Shape dividers ---- */
@@ -417,7 +430,7 @@ h2 {
 
 /* ---- Services ---- */
 #services {
-  padding-top: 100px;
+  /* le retrait haut est porté par .ad (bloc d'intro) pour rester symétrique */
   overflow-x: hidden;
 }
 .flex-fill {
@@ -542,10 +555,19 @@ footer .container {
   }
   .hero h1 {
     padding-right: 0;
-    font-size: 50px;
+    font-size: 70px;
   }
   .hero-button {
-    font-size: 13px;
+    font-size: clamp(10px, 3.1vw, 13px) !important;
+    padding: 10px 12px !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.2px !important;
+  }
+  .hero-button svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
   }
   .services .flex-fill {
     max-width: 300px;
@@ -564,6 +586,27 @@ footer .container {
 @media screen and (min-width: 768px) {
   .hero h1 {
     font-size: 66px;
+  }
+  /* Blocs d'intro : largeur calée pour que chaque texte tombe sur 3 lignes
+     (mesuré à 20px/30px : Compétences tient en 3 lignes de 460 à 660px, Services à partir de 770px) */
+  #skills .ad {
+    max-width: 560px;
+  }
+  #services .ad {
+    max-width: 820px;
+  }
+  /* le bloc réserve toujours 3 lignes de hauteur, même si le texte en remplit moins */
+  .ad .info {
+    line-height: 1.5;
+    min-height: calc(3 * 1.5em);
+  }
+}
+
+/* Tablette : #skills p / #services p forcent la police à 16px, Compétences doit être
+   resserré pour rester sur 3 lignes (Services est déjà bridé par le container à 720px) */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  #skills .ad {
+    max-width: 440px;
   }
 }
 

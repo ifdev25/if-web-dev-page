@@ -11,7 +11,7 @@ export default function ServicesSection() {
   return (
     <section className="bg-night pb-12">
       <div className="container" id="services">
-        <div className="container text-white text-center py-12 ad slide-in from-left">
+        <div className="container text-white text-center ad slide-in from-left">
           <p className="info text-2xl text-white">
             Pour concevoir des visuels et des sites personnalisés répondant aux besoins de mes
             clients, je collabore étroitement avec eux, garantissant ainsi une présence en ligne

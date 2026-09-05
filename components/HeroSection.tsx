@@ -28,7 +28,7 @@ export default function HeroSection() {
         onClick={toggleMenu}
         aria-label="Menu"
       >
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        {menuOpen ? <X size={48} /> : <Menu size={48} />}
       </button>
 
       <div className="flex flex-col h-full">

@@ -5,8 +5,8 @@ export default function SkillsSection() {
   return (
     <section className="relative bg-black" id="skills">
 
-      <div className="container text-white text-center mb-12 ad">
-        <p className="info text-2xl md:mx-12 my-12 text-white">
+      <div className="container text-white text-center ad">
+        <p className="info text-2xl text-white">
           Vous souhaitez mettre en avant votre activité sur le web ? Démarquez-vous avec des
           créations uniques. Boostez votre visibilité dès aujourd&apos;hui.
         </p>
