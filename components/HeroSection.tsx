@@ -31,7 +31,7 @@ export default function HeroSection() {
         {menuOpen ? <X size={48} /> : <Menu size={48} />}
       </button>
 
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col flex-1">
 
         {/* Navbar */}
         <nav className="flex flex-wrap items-center py-4">
@@ -67,7 +67,7 @@ export default function HeroSection() {
               <h1 className="font-bold my-4 text-shadow-dark">
                 Votre <span className="highlighted">Image</span> de marque propulsée !
               </h1>
-              <p className="text-star info">
+              <p className="info">
                 Créateur de visuels, site vitrine et d&apos;e-commerce Wordpress
               </p>
               <div className="flex justify-center lg:justify-start">
@@ -83,9 +83,8 @@ export default function HeroSection() {
               <Image
                 className="mobile-banner"
                 src="/img/dark-craft.png"
-                width={300}
-                height={300}
-                style={{ width: "55%" }}
+                width={400}
+                height={400}
                 alt="dark-craft"
               />
             </div>
@@ -104,11 +103,13 @@ export default function HeroSection() {
 
           </div>
         </div>
-      </div>
 
-      {/* Séparateur ville de nuit */}
-      <div className="custom-shape-divider-bottom-1692800020">
-        <Image src="/img/city-night.svg" alt="city-night-image" width={1400} height={150} />
+        {/* Ville de nuit : socle du bloc Compétences.
+            Dans le flux et en dernier : sa base reste toujours collée au haut
+            de #skills, et le contenu du hero ne peut plus passer dessous. */}
+        <div className="city-skyline">
+          <Image src="/img/city-night.svg" alt="city-night-image" width={1920} height={150} priority />
+        </div>
       </div>
 
     </header>

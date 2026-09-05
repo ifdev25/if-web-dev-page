@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
 
           {/* Réseaux sociaux */}
-          <div className="w-full lg:w-1/3 mb-12 lg:mb-0 py-4 web">
+          <div className="w-full lg:w-1/3 mb-12 lg:mb-0 py-4">
             <h4 className="uppercase mb-6 text-shadow-dark">Autour du web</h4>
             <a className="btn-social rounded-full mx-1" href="mailto:ifwebdev@hotmail.com" aria-label="Envoyer un e-mail">
               <Mail size={20} />

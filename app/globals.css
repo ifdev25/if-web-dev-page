@@ -31,13 +31,9 @@ html {
 :root {
   --main-color: #558abb;
   --violet: #371479;
-  --bs-white-gb: whitesmoke;
   --second-color: #1b1b1b;
   --third-color: #d4d4d4;
   --bg-color: #ebebeb;
-  --main-grid: repeat(auto-fill, minmax(250px, 1fr));
-  --main-padding: 40px;
-  --blue-shadow: 5px 5px var(--main-color);
   --dark-shadow: 5px 5px black;
   --ligth-shadow: 5px 5px var(--violet);
 }
@@ -86,12 +82,15 @@ h6 { font-size: 1rem;    font-weight: 500; line-height: 1.2; }
 
 /* ---- Layout général ---- */
 header {
-  padding-bottom: 200px;
-  height: 80vh;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 nav {
   font-weight: 600;
   font-size: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---- Nav mobile ---- */
@@ -146,9 +145,6 @@ nav {
   position: fixed;
   background: whitesmoke;
   color: #4158d0;
-}
-.menu-btn.appear i:before {
-  content: '\f00d';
 }
 .wrapper-mobile ul {
   display: flex;
@@ -215,6 +211,9 @@ a.nav-link:hover {
   background-color: transparent;
   background-image: radial-gradient(at bottom center, #c184fd 0, #f2295b00 100%);
   opacity: 0.18;
+  /* purement decoratif : sans ca, le calque passe au-dessus du contenu non
+     positionne (navbar, footer, cartes) et intercepte les clics et le hover */
+  pointer-events: none;
 }
 
 /* ---- Hero ---- */
@@ -229,13 +228,21 @@ a.nav-link:hover {
 .hero h1 {
   font-size: 90px;
 }
-.mobile-banner {
+/* .hero .mobile-banner : spécificité supérieure à `.hero img { max-width: 450px !important }` */
+.hero .mobile-banner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1 !important;
+  /* bornée à la boîte du hero : elle ne peut ni descendre sur la skyline
+     ni déborder de la largeur de l’écran */
+  height: 100%;
+  width: auto;
+  max-width: 60% !important;
+  object-fit: contain;
   padding: 10px;
+  pointer-events: none;
 }
 .hero h1 .highlighted {
   color: #c91414;
@@ -294,28 +301,32 @@ a.nav-link:hover {
   padding-top: 50px;
   padding-bottom: 50px;
 }
-/* Compétences : le divider SVG du hero fait déjà le retrait haut */
+/* Compétences : la skyline du hero fait déjà le retrait haut */
 #skills .ad {
   padding-top: 0;
 }
 
-/* ---- Shape dividers ---- */
-.custom-shape-divider-bottom-1692800020 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+/* ---- Ville de nuit : socle figé du bloc Compétences ----
+   Dernier bloc du header, dans le flux : sa base reste toujours collée au haut
+   de #skills (les deux se déplacent ensemble) et le contenu du hero ne peut
+   plus passer dessous. --skyline-gap = garde-fou boutons / fusée. */
+.city-skyline {
+  --skyline-gap: 48px;
+  position: relative;
   z-index: 5000;
-  height: 150px;
-  transform: translateY(2px);
   width: 100%;
-  overflow-x: hidden;
+  /* la skyline entière est toujours affichée en entier : la hauteur suit la
+     largeur pour que la silhouette ne soit jamais étirée n'importe comment */
+  height: clamp(80px, 10.4vw, 150px);
+  margin-top: var(--skyline-gap);
   line-height: 0;
+  pointer-events: none;
 }
-.custom-shape-divider-bottom-1692800020 img {
+.city-skyline img {
   display: block;
-  min-width: 1400px;
   width: 100%;
-  height: 150px;
+  /* 2px de rab : aucun liséré entre les toits et le bloc noir */
+  height: calc(100% + 2px);
 }
 .divider-separator {
   width: 46px;
@@ -334,22 +345,12 @@ a.nav-link:hover {
 }
 
 /* ---- Compétences ---- */
-h2 {
-  font-weight: 700;
-}
 #skills {
   overflow-x: hidden;
 }
+/* les h4 sont tous dans une carte : seule la couleur n'est pas reprise par .skills .card h4 */
 .skills h4 {
-  font-size: 35px;
   color: whitesmoke;
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
-.skills p {
-  font-size: 18px;
-  color: var(--second-color);
-  font-weight: 400;
 }
 .skills-container {
   padding-bottom: 50px;
@@ -395,11 +396,8 @@ h2 {
   border-radius: 10px;
 }
 .skills .card img {
-  font-size: 42px;
-  padding: 0;
   width: 75px;
   height: 75px;
-  color: var(--second-color);
   background-color: #c91414;
   position: absolute;
   top: calc(-75px / 2);
@@ -418,7 +416,6 @@ h2 {
   transform: rotate(360deg);
   background-color: var(--bg-color);
 }
-.skills .card:hover h4,
 .skills .card:hover p {
   color: whitesmoke;
   transition: 1s;
@@ -496,20 +493,26 @@ footer .container {
   z-index: 3000;
 }
 .btn-social {
-  border-radius: 100%;
-  border: 2px solid white;
   display: inline-flex;
-  width: 3.25rem;
-  height: 3.25rem;
-  font-size: 1.25rem;
   justify-content: center;
   align-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 2px solid white;
+  border-radius: 100%;
+  font-size: 1.25rem;
+  color: white;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-social:hover {
+  background-color: white;
+  color: #121244;
 }
 
 /* ---- Media queries ---- */
 @media screen and (max-width: 992px) {
-  header {
-    padding-bottom: 150px;
+  .city-skyline {
+    --skyline-gap: 36px;
   }
   .hero * {
     text-align: center;
@@ -621,7 +624,7 @@ footer .container {
 
 @media screen and (min-width: 1200px) {
   .hero img {
-    transform: translateX(-20px) translateY(15%) !important;
+    transform: translateX(-20px) !important;
   }
   .hero h1 {
     font-size: 70px;
@@ -630,13 +633,13 @@ footer .container {
 
 @media screen and (min-width: 1400px) {
   .hero img {
-    transform: translateX(-100px) translateY(15%) !important;
+    transform: translateX(-100px) !important;
   }
 }
 
 /* ============================================================
    Équivalents Bootstrap — composants utilisés dans le projet
-   (form-floating, alert, spinner, btn, btn-social, container-lg)
+   (btn, form-control, form-floating, validation, alert)
    ============================================================ */
 
 /* ---- Base bouton (Bootstrap .btn reset) ---- */
@@ -649,28 +652,6 @@ footer .container {
   user-select: none;
   vertical-align: middle;
   text-decoration: none;
-}
-
-/* ---- container-lg (container Bootstrap qui s'active à partir de lg) ---- */
-.container-lg {
-  width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
-  margin-right: auto;
-  margin-left: auto;
-}
-@media (min-width: 992px)  { .container-lg { max-width: 960px; } }
-@media (min-width: 1200px) { .container-lg { max-width: 1140px; } }
-@media (min-width: 1400px) { .container-lg { max-width: 1320px; } }
-
-/* ---- btn-social (icônes réseaux footer) ---- */
-.btn-social {
-  color: white;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.btn-social:hover {
-  background-color: white;
-  color: #121244;
 }
 
 /* ---- Form control ---- */
@@ -777,17 +758,3 @@ footer .container {
 }
 .btn-close::before { content: '×'; }
 .btn-close:hover { opacity: 1; }
-
-/* ---- Spinner ---- */
-.spinner-border {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  vertical-align: -0.125em;
-  border: 0.2em solid currentColor;
-  border-right-color: transparent;
-  border-radius: 50%;
-  animation: spinner-rotate 0.75s linear infinite;
-}
-.spinner-border-sm { width: 0.85rem; height: 0.85rem; border-width: 0.18em; }
-@keyframes spinner-rotate { to { transform: rotate(360deg); } }
