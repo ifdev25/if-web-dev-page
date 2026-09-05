@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Code2, Paintbrush } from "lucide-react";
 
 export default function SkillsSection() {
   return (
@@ -34,7 +35,7 @@ export default function SkillsSection() {
             {/* FrontEnd */}
             <div className="w-full sm:w-1/2 flex fade-in pt-12">
               <div className="card bg-night flex-fill mx-auto my-12 p-6">
-                <i className="fas fa-pencil-ruler" />
+                <span className="skill-icon"><Code2 size={40} /></span>
                 <h4>FrontEnd</h4>
                 <p>Maitrise des technologies, HTML CSS et REACT.</p>
               </div>
@@ -52,7 +53,7 @@ export default function SkillsSection() {
             {/* Design */}
             <div className="w-full sm:w-1/2 flex fade-in">
               <div className="card bg-night flex-fill mx-auto my-12 p-6">
-                <i className="fas fa-brush" />
+                <span className="skill-icon"><Paintbrush size={40} /></span>
                 <h4>Design</h4>
                 <p>Dispose des meilleurs outils tel que Photoshop et Canvas.</p>
               </div>

@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 const ShapeDividerTop = () => (
   <div className="custom-shape-divider-top-1">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -15,7 +17,10 @@ const ShapeDividerBottom = () => (
 );
 
 const CheckItem = ({ text }: { text: string }) => (
-  <li className="text-center"><i className="fas fa-check pr-2" />{text}</li>
+  <li className="text-center flex items-center justify-center gap-2">
+    <Check size={14} className="shrink-0 text-white/75" />
+    {text}
+  </li>
 );
 
 export default function ServicesSection() {
@@ -41,7 +46,7 @@ export default function ServicesSection() {
 
           {/* Carte 1 — Logos & visuels */}
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline">
+            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour conception de logos et visuels">
               <div className="p-6 m-4 md:m-2 lg:m-12 xl:m-4 bg-black/75 rounded-lg card flex-fill">
                 <h3 className="text-center m-4 text-white font-semibold">
                   Conception Logos et visuels personnalisés
@@ -65,7 +70,7 @@ export default function ServicesSection() {
 
           {/* Carte 2 — Site Vitrine */}
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline">
+            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour site vitrine WordPress ou Symfony">
               <div className="p-6 m-4 md:m-2 lg:m-12 xl:m-4 bg-black/75 rounded-lg card flex-fill head-2">
                 <h3 className="text-center my-4 text-white font-semibold">
                   Site Vitrine Wordpress ou Symfony
@@ -90,7 +95,7 @@ export default function ServicesSection() {
 
           {/* Carte 3 — E-commerce */}
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline">
+            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour création de site e-commerce WordPress">
               <div className="p-6 m-4 md:m-2 lg:m-12 xl:m-4 bg-black/75 text-white rounded-lg card flex-fill flex flex-col head-3">
                 <h3 className="text-center my-4 text-white font-semibold">
                   Création Site e-commerce Wordpress
@@ -100,7 +105,10 @@ export default function ServicesSection() {
                 <ul className="list-none text-white/75 p-0">
                   <CheckItem text="Design moderne" />
                   <CheckItem text="Site Responsive" />
-                  <li className="text-center"><i className="fas fa-check pr-2" />Intégration jusqu&apos;à 20 produits</li>
+                  <li className="text-center flex items-center justify-center gap-2">
+                    <Check size={14} className="shrink-0 text-white/75" />
+                    Intégration jusqu&apos;à 20 produits
+                  </li>
                   <CheckItem text="Formulaire de contact" />
                   <CheckItem text="Optimisation SEO" />
                   <CheckItem text="Hébergement O2switch" />

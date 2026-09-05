@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,12 +47,6 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         {children}
-        {/* Font Awesome Kit — chargé après l'interactivité pour ne pas bloquer le rendu */}
-        <Script
-          src="https://kit.fontawesome.com/a88ec3c01d.js"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );

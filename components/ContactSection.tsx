@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, FormEvent } from "react";
+import { Send, Loader2 } from "lucide-react";
 
 interface FormData {
   fullName: string;
@@ -79,7 +80,7 @@ export default function ContactSection() {
 
           {/* Image laptop */}
           <div className="w-full lg:w-1/2 flex justify-center items-center slide-in from-left">
-            <Image className="w-3/4" src="/img/laptop_form_3.png" width={500} height={400} loading="lazy" alt="laptop-image" />
+            <Image className="w-3/4" src="/img/laptop_form_3.webp" width={500} height={400} loading="lazy" alt="laptop-image" />
           </div>
 
           {/* Formulaire */}
@@ -141,11 +142,11 @@ export default function ContactSection() {
                 {errors.message && <div className="invalid-feedback">{errors.message}</div>}
               </div>
 
-              <button type="submit" className="btn hero-button red-button" disabled={status === "loading"}>
+              <button type="submit" className="btn hero-button red-button inline-flex items-center gap-2" disabled={status === "loading"}>
                 {status === "loading" ? (
-                  <><span className="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true" />Envoi en cours…</>
+                  <><Loader2 size={16} className="animate-spin" />Envoi en cours…</>
                 ) : (
-                  <><i className="fa-solid fa-paper-plane mr-2" />Envoyer</>
+                  <><Send size={16} />Envoyer</>
                 )}
               </button>
 
