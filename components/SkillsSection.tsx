@@ -23,9 +23,10 @@ export default function SkillsSection() {
           {/* Texte gauche */}
           <div className="w-full lg:w-5/12 flex justify-center items-center">
             <p className="p-2 text-2xl info sm:hidden lg:block lg:mr-12 text-white skills-text">
-              Freelance passionné de création visuelle, je réalise des sites web en WordPress et
-              Symfony. Mon objectif est d&apos;aider les artisans et les PME à promouvoir leur image
-              en ligne.
+              Freelance passionné de création visuelle, je conçois des sites web et des applications
+              sur mesure avec Next.js et Symfony, en optimisant mon développement grâce aux outils
+              d&apos;IA. Mon objectif est d&apos;aider les artisans et les PME à propulser leur image
+              et leur activité en ligne.
             </p>
           </div>
 
