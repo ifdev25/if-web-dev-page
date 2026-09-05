@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { checkRateLimit, getClientIp } from "./rate-limit";
 
 // Équivalent du DefaultController + ContactFormType Symfony
 // Reçoit le formulaire, valide, et envoie l'e-mail via nodemailer (= Symfony Mailer)
@@ -24,6 +25,16 @@ function validate(data: ContactPayload): string | null {
 
 export async function POST(req: NextRequest) {
   try {
+    // Anti-spam : limite les envois répétés depuis une même IP
+    const { allowed, retryAfter } = checkRateLimit(getClientIp(req));
+    if (!allowed) {
+      const minutes = Math.ceil(retryAfter / 60);
+      return NextResponse.json(
+        { error: `Trop de messages envoyés. Veuillez réessayer dans ${minutes} minute${minutes > 1 ? "s" : ""}.` },
+        { status: 429, headers: { "Retry-After": String(retryAfter) } }
+      );
+    }
+
     const body: ContactPayload = await req.json();
 
     const error = validate(body);

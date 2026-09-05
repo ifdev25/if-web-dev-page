@@ -46,6 +46,9 @@ export default function ContactSection() {
   const [form, setForm] = useState<FormData>({ fullName: "", email: "", prestation: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState(
+    "Une erreur s'est produite. Veuillez réessayer."
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -63,9 +66,18 @@ export default function ContactSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) { setStatus("success"); setForm({ fullName: "", email: "", prestation: "", message: "" }); }
-      else setStatus("error");
-    } catch { setStatus("error"); }
+      if (res.ok) {
+        setStatus("success");
+        setForm({ fullName: "", email: "", prestation: "", message: "" });
+      } else {
+        const data = await res.json().catch(() => null);
+        setErrorMessage(data?.error ?? "Une erreur s'est produite. Veuillez réessayer.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("Une erreur s'est produite. Veuillez réessayer.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -94,7 +106,7 @@ export default function ContactSection() {
             )}
             {status === "error" && (
               <div className="alert alert-danger my-6" role="alert">
-                Une erreur s&apos;est produite. Veuillez réessayer.
+                {errorMessage}
                 <button type="button" className="btn-close" onClick={() => setStatus("idle")} aria-label="Close" />
               </div>
             )}
