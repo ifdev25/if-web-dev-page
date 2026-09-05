@@ -1,21 +1,5 @@
 import { Check } from "lucide-react";
 
-const ShapeDividerTop = () => (
-  <div className="custom-shape-divider-top-1">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="shape-fill" />
-    </svg>
-  </div>
-);
-
-const ShapeDividerBottom = () => (
-  <div className="custom-shape-divider-bottom-1">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="shape-fill" />
-    </svg>
-  </div>
-);
-
 const CheckItem = ({ text }: { text: string }) => (
   <li className="text-center flex items-center justify-center gap-2">
     <Check size={14} className="shrink-0 text-white/75" />
@@ -26,8 +10,6 @@ const CheckItem = ({ text }: { text: string }) => (
 export default function ServicesSection() {
   return (
     <section className="bg-night pb-12">
-      <ShapeDividerTop />
-
       <div className="container" id="services">
         <div className="container text-white text-center py-12 ad slide-in from-left">
           <p className="info text-2xl text-white">
@@ -130,8 +112,6 @@ export default function ServicesSection() {
           </p>
         </div>
       </div>
-
-      <ShapeDividerBottom />
     </section>
   );
 }
