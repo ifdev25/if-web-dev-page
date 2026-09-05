@@ -58,11 +58,7 @@ export default function Footer() {
             <p className="text-lg">
               J&apos;aide les artisans du bâtiment, PME et industriels à promouvoir leur activité en
               ligne. Démarquez-vous en collaborant avec un professionnel indépendant passionné du
-              design et du web. Ce site est protégé par reCAPTCHA et Google.{" "}
-              <a href="https://policies.google.com/privacy" className="text-white">Politique de confidentialité</a>{" "}
-              et{" "}
-              <a href="https://policies.google.com/terms" className="text-white">Conditions d&apos;utilisation</a>{" "}
-              appliquées.
+              design et du web.
             </p>
           </div>
 

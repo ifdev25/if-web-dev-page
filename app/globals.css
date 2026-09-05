@@ -532,9 +532,6 @@ footer .container {
   justify-content: center;
   align-items: center;
 }
-.grecaptcha-badge {
-  visibility: hidden;
-}
 
 /* ---- Media queries ---- */
 @media screen and (max-width: 992px) {
