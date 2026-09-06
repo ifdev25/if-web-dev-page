@@ -31,7 +31,7 @@ export default function HeroSection() {
         {menuOpen ? <X size={48} /> : <Menu size={48} />}
       </button>
 
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col">
 
         {/* Navbar */}
         <nav className="flex flex-wrap items-center py-4">
@@ -60,7 +60,7 @@ export default function HeroSection() {
         </nav>
 
         {/* Contenu hero */}
-        <div className="container flex justify-center flex-1">
+        <div className="container flex justify-center">
           <div className="hero flex flex-wrap w-full mb-4 items-center">
 
             <div className="text-white flex flex-col flex-1 lg:flex-[3]">

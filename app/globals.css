@@ -82,7 +82,9 @@ h6 { font-size: 1rem;    font-weight: 500; line-height: 1.2; }
 
 /* ---- Layout général ---- */
 header {
-  min-height: 80vh;
+  /* Pas de hauteur en vh : le header fait exactement la hauteur de son contenu,
+     les blocs s empilent les uns apres les autres. La respiration avant la
+     skyline vient de --skyline-gap, identique quelle que soit la fenetre. */
   display: flex;
   flex-direction: column;
 }
