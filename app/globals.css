@@ -228,7 +228,10 @@ a.nav-link:hover {
   max-width: 450px !important;
 }
 .hero h1 {
-  font-size: 90px;
+  /* Taille fluide : croit continument avec la largeur, plus d inversion entre
+     les paliers. 38px plancher (lisible et sans debordement des 320px), 70px
+     plafond atteint vers 1220px (taille desktop actuelle inchangee). */
+  font-size: clamp(38px, 3.6vw + 26px, 70px);
 }
 /* .hero .mobile-banner : spécificité supérieure à `.hero img { max-width: 450px !important }` */
 .hero .mobile-banner {
@@ -524,7 +527,6 @@ footer .container {
   }
   .hero h1 {
     padding-right: 0;
-    font-size: 75px;
   }
   .hero p {
     font-size: 16px;
@@ -560,7 +562,6 @@ footer .container {
   }
   .hero h1 {
     padding-right: 0;
-    font-size: 70px;
   }
   .hero-button {
     font-size: clamp(10px, 3.1vw, 13px) !important;
@@ -589,9 +590,6 @@ footer .container {
 }
 
 @media screen and (min-width: 768px) {
-  .hero h1 {
-    font-size: 66px;
-  }
   /* Blocs d'intro : largeur calée pour que chaque texte tombe sur 3 lignes
      (mesuré à 20px/30px : Compétences tient en 3 lignes de 460 à 660px, Services à partir de 770px) */
   #skills .ad {
@@ -619,17 +617,11 @@ footer .container {
   .mobile-banner {
     display: none !important;
   }
-  .hero h1 {
-    font-size: 67px;
-  }
 }
 
 @media screen and (min-width: 1200px) {
   .hero img {
     transform: translateX(-20px) !important;
-  }
-  .hero h1 {
-    font-size: 70px;
   }
 }
 

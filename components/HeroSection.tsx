@@ -65,7 +65,7 @@ export default function HeroSection() {
 
             <div className="text-white flex flex-col flex-1 lg:flex-[3]">
               <h1 className="font-bold my-4 text-shadow-dark">
-                Votre <span className="highlighted">Image</span> de marque propulsée !
+                Votre <span className="highlighted">Image</span> de marque propulsée&nbsp;!
               </h1>
               <p className="info">
                 Créateur de visuels, site vitrine et d&apos;e-commerce Wordpress
