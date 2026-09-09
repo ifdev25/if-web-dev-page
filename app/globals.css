@@ -40,6 +40,43 @@ html {
      16px sous ~460px, puis 3.5vw, plafonnee a 48px a partir de ~1370px.
      Tout ce qui borde l ecran (container, bouton burger) s y aligne. */
   --gutter: clamp(16px, 3.5vw, 48px);
+
+  /* ---- Echelle typographique --------------------------------------------
+     Un seul jeu de tokens pour tout le site. Chaque taille est fluide sur la
+     MEME fenetre 380px -> 1380px, celle deja utilisee par le titre du banner :
+     toutes les tailles croissent donc au meme rythme et la hierarchie reste
+     identique quelle que soit la largeur d ecran. Aucune taille en px fixe :
+     un texte fige a cote d un texte fluide finit toujours par se croiser.
+     Rapport ~1.2 a 1.4 entre deux crans, resserre vers le bas de l echelle. */
+  --fs-display: clamp(38px, 4.2vw + 22px, 80px);   /* titre du banner   38 -> 80 */
+  --fs-h1: clamp(32px, 2.4vw + 22.88px, 56px);     /*                   32 -> 56 */
+  --fs-h2: clamp(28px, 1.2vw + 23.44px, 40px);     /* titres de section 28 -> 40 */
+  --fs-h3: clamp(22px, 0.8vw + 18.96px, 30px);     /* titres de carte   22 -> 30 */
+  --fs-h4: clamp(20px, 0.6vw + 17.72px, 26px);     /* titres du footer  20 -> 26 */
+  --fs-h5: clamp(18px, 0.4vw + 16.48px, 22px);     /*                   18 -> 22 */
+  --fs-lead: clamp(16px, 0.4vw + 14.48px, 20px);   /* chapo (.info)     16 -> 20 */
+  --fs-body: clamp(16px, 0.2vw + 15.24px, 18px);   /* texte courant     16 -> 18 */
+  --fs-sm: clamp(14px, 0.2vw + 13.24px, 16px);     /* nav, mentions     14 -> 16 */
+  /* Le bouton est le seul cran a descendre sous 14px : ses deux exemplaires du
+     banner doivent tenir cote a cote des 320px. Meme fenetre que le reste. */
+  --fs-btn: clamp(10px, 1.71vw + 4.84px, 18px);    /* boutons           10 -> 18 */
+
+  /* Hauteurs de ligne : 4 valeurs, toutes sans unite. Une hauteur de ligne en
+     px (35px, 50px) ne suit pas une taille fluide et finit par ecraser ou
+     aerer le texte selon la largeur d ecran. */
+  --lh-display: 1.1;
+  --lh-heading: 1.25;
+  --lh-body: 1.5;
+  --lh-loose: 1.8; /* listes de prestations */
+
+  /* Graisses. La woff2 de GT Walsheim Pro n est fournie qu en 400 : le
+     navigateur rend 400 et 500 exactement pareil, puis simule le gras a partir
+     de 600, si bien que 600 et 700 sont eux aussi identiques. Il n existe donc
+     que DEUX rendus possibles. On ne declare que ces deux-la, pour que le CSS
+     dise ce qui s affiche vraiment. Fournir une vraie Bold en woff2 ajouterait
+     un cran supplementaire. */
+  --fw-regular: 400;
+  --fw-bold: 700;
 }
 
 /* ---- Container : remplace le plugin Tailwind (desactive dans tailwind.config)
@@ -57,6 +94,9 @@ html {
 
 body {
   font-family: 'GT Walsheim Pro', sans-serif;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -66,18 +106,31 @@ body {
 /* h1 en Fugaz One (Google Fonts, chargee par next/font dans layout.tsx).
    La font n existe qu en 400 : on fige la graisse pour ne pas declencher
    de gras synthetique, et on passe le titre en majuscules. */
+/* Tous les titres partagent la meme graisse et la meme hauteur de ligne : la
+   difference entre deux niveaux ne se joue que sur la taille. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+}
 h1 {
   font-family: var(--font-fugaz), 'GT Walsheim Pro', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: var(--fs-h1);
+  /* Fugaz One n existe qu en 400 : on fige la graisse pour ne pas declencher
+     de gras synthetique, et on passe le titre en majuscules. */
+  font-weight: var(--fw-regular);
   text-transform: uppercase;
 }
-h2 { font-size: 2rem;    font-weight: 700; line-height: 1.2; }
-h3 { font-size: 1.75rem; font-weight: 500; line-height: 1.2; }
-h4 { font-size: 1.5rem;  font-weight: 500; line-height: 1.2; }
-h5 { font-size: 1.25rem; font-weight: 500; line-height: 1.2; }
-h6 { font-size: 1rem;    font-weight: 500; line-height: 1.2; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-body); }
+small { font-size: var(--fs-sm); }
 
 /* ---- Animations scroll ---- */
 .fade-in {
@@ -115,8 +168,8 @@ header {
   flex-direction: column;
 }
 nav {
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
   position: relative;
   z-index: 1;
 }
@@ -189,12 +242,14 @@ nav {
 }
 .wrapper-mobile ul li a {
   text-decoration: none;
-  font-size: 30px;
-  font-weight: 700;
+  /* meme cran que les titres de section : le menu plein ecran est un ecran de
+     navigation a part entiere, pas une liste de liens secondaires */
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
   padding: 5px 10px;
   color: #4158d0;
   position: relative;
-  line-height: 50px;
+  line-height: var(--lh-heading);
   transition: all 0.3s ease;
 }
 
@@ -263,10 +318,12 @@ a.nav-link:hover {
   transform: translateX(clamp(-100px, 600px - 50vw, 0px));
 }
 .hero h1 {
-  /* Taille fluide : croit continument avec la largeur, pas d inversion entre
-     les paliers. 38px plancher (PROPULSEE ! tient dans 320px), 80px plafond
-     atteint vers 1380px (taille validee en 16/9 desktop). */
-  font-size: clamp(38px, 4.2vw + 22px, 80px);
+  /* Cran le plus haut de l echelle. 38px plancher (PROPULSEE ! tient dans
+     320px), 80px plafond atteint vers 1380px (taille validee en 16/9 desktop).
+     C est cette fenetre 380 -> 1380px qui sert de reference a tous les autres
+     tokens de taille. */
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
   /* filet de securite : aucun mot ne peut deborder de la colonne */
   overflow-wrap: break-word;
 }
@@ -310,10 +367,10 @@ a.nav-link:hover {
 .hero-button {
   padding: clamp(10px, 0.49vw + 8.24px, 12px) clamp(12px, 1.96vw + 4.96px, 20px) !important;
   border-radius: 10px !important;
-  font-size: clamp(10px, 1.71vw + 4.84px, 18px) !important;
-  font-weight: 500 !important;
+  font-size: var(--fs-btn) !important;
+  font-weight: var(--fw-bold) !important;
   text-transform: uppercase !important;
-  line-height: 1.2 !important;
+  line-height: var(--lh-heading) !important;
   gap: clamp(6px, 0.49vw + 4.24px, 8px) !important;
   letter-spacing: clamp(-0.2px, 0.049vw - 0.376px, 0px) !important;
   white-space: nowrap !important;
@@ -560,7 +617,7 @@ a.nav-link:hover {
 }
 .rings-logo-ai {
   font-size: calc(var(--dotsize) * 0.42);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   letter-spacing: calc(var(--dotsize) * -0.015);
 }
 .rings-logo-react {
@@ -603,10 +660,10 @@ a.nav-link:hover {
 
 .info {
   opacity: 0.6;
-  /* 16px sous 576px, 20px a partir de 1200px, en continu entre les deux.
-     Remplace les surcharges .hero p / #skills p / #services p qui forcaient
-     16px !important et sautaient a 20px a 992px. */
-  font-size: clamp(16px, 0.64vw + 12.31px, 20px);
+  /* Chapo : un cran au-dessus du texte courant. Remplace les surcharges
+     .hero p / #skills p / #services p qui forcaient 16px !important et
+     sautaient a 20px a 992px. */
+  font-size: var(--fs-lead);
 }
 
 /* ---- Services ---- */
@@ -634,10 +691,6 @@ a.nav-link:hover {
 section .services {
   position: relative;
   z-index: revert;
-  background-image: url('/img/white-ribbon.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 .services .card {
   flex: 1;
@@ -664,13 +717,15 @@ section .services {
 .services .card div {
   margin-top: auto;
 }
+/* Le prix est l ancre visuelle de la carte : un cran au-dessus de son titre. */
 .price {
   color: #c91414;
-  font-size: 35px;
-  font-weight: 600;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
 }
 .services li {
-  line-height: 35px;
+  line-height: var(--lh-loose);
 }
 
 /* ---- Contact ---- */
@@ -697,7 +752,6 @@ footer .container {
   height: 3.25rem;
   border: 2px solid white;
   border-radius: 100%;
-  font-size: 1.25rem;
   color: white;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -734,18 +788,13 @@ footer .container {
 }
 
 @media screen and (max-width: 575.98px) {
-  section .services {
-    background-image: url('/img/vertical-white-ribbon.png');
-    background-size: cover;
-    background-position: center center;
-  }
   .hero h1 {
     padding-right: 0;
   }
   .skills-text {
     padding-top: 48px !important;
   }
-  #skills div:nth-child(2) {
+  .skills-container {
     padding-bottom: 0 !important;
   }
 }
@@ -764,8 +813,7 @@ footer .container {
   }
   /* le bloc réserve toujours 3 lignes de hauteur, même si le texte en remplit moins */
   .ad .info {
-    line-height: 1.5;
-    min-height: calc(3 * 1.5em);
+    min-height: calc(3 * var(--lh-body) * 1em);
   }
   /* 2 cartes par ligne : la gouttiere grandit avec la place disponible */
   .services .card {
@@ -818,9 +866,9 @@ footer .container {
 .form-control {
   display: block;
   width: 100%;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
   color: #212529;
   background-color: #fff;
   border-radius: 0.375rem;
@@ -841,7 +889,7 @@ footer .container {
 .form-floating > select.form-control {
   height: calc(3.5rem + 2px);
   padding: 1rem 0.75rem 0.25rem;
-  line-height: 1.25;
+  line-height: var(--lh-heading);
 }
 .form-floating > textarea.form-control {
   height: auto;
@@ -879,7 +927,7 @@ footer .container {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   color: #dc3545;
 }
 .is-invalid ~ .invalid-feedback {
@@ -912,7 +960,7 @@ footer .container {
   border: 0;
   cursor: pointer;
   opacity: 0.5;
-  font-size: 1.5rem;
+  font-size: var(--fs-h4);
   line-height: 1;
   color: currentColor;
 }

@@ -90,11 +90,6 @@ export default function ContactSection() {
       <div className="container text-white">
         <div className="flex flex-wrap">
 
-          {/* Image laptop */}
-          <div className="w-full lg:w-1/2 flex justify-center items-center slide-in from-left">
-            <Image className="w-3/4" src="/img/laptop_form_3.webp" width={500} height={400} loading="lazy" alt="laptop-image" />
-          </div>
-
           {/* Formulaire */}
           <div className="w-full lg:w-1/2 py-12 px-4 fade-in">
 
@@ -111,7 +106,7 @@ export default function ContactSection() {
               </div>
             )}
 
-            <h3 className="my-6 text-shadow-light font-semibold mx-4">Améliorez votre image !</h3>
+            <h3 className="my-6 text-shadow-light mx-4">Améliorez votre image !</h3>
 
             <form onSubmit={handleSubmit} className="mx-4" noValidate>
 
@@ -163,6 +158,11 @@ export default function ContactSection() {
               </button>
 
             </form>
+          </div>
+
+          {/* Image laptop */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center slide-in from-right">
+            <Image className="w-3/4" src="/img/laptop_form_3.webp" width={500} height={400} loading="lazy" alt="laptop-image" />
           </div>
         </div>
       </div>
