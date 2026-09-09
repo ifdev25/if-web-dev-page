@@ -77,7 +77,8 @@ export async function POST(req: NextRequest) {
     const { error: sendError } = await resend.emails.send({
       from,
       to,
-      bcc: process.env.MAIL_BCC,
+      // Chaine vide -> undefined : Resend rejette un bcc vide.
+      bcc: process.env.MAIL_BCC || undefined,
       // Répondre à l'e-mail reçu écrit directement au visiteur
       replyTo: body.email,
       subject: `Message concernant un ${body.prestation}`,
