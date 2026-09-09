@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 /**
  * Hook équivalent à fadeInScroll.js / mobileNav.js
@@ -8,12 +8,12 @@ import { useEffect, useRef } from "react";
  * quand ils entrent dans le viewport.
  */
 export function useScrollAnimation() {
-  const initialized = useRef(false);
-
   useEffect(() => {
-    if (initialized.current) return;
-    initialized.current = true;
-
+    // Pas de garde "deja initialise" ici : en dev, le StrictMode monte l'effet
+    // deux fois (run -> cleanup -> run). Une garde ferait revenir le 2e run
+    // avant la creation de l'observer, alors que le cleanup du 1er l'a deja
+    // deconnecte : plus personne n'observe et tout reste a opacity 0.
+    // L'effet est idempotent, le relancer ne coute rien.
     const faders = document.querySelectorAll<HTMLElement>(".fade-in");
     const sliders = document.querySelectorAll<HTMLElement>(".slide-in");
 
