@@ -691,10 +691,6 @@ a.nav-link:hover {
 section .services {
   position: relative;
   z-index: revert;
-  background-image: url('/img/white-ribbon.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 .services .card {
   flex: 1;
@@ -792,18 +788,13 @@ footer .container {
 }
 
 @media screen and (max-width: 575.98px) {
-  section .services {
-    background-image: url('/img/vertical-white-ribbon.png');
-    background-size: cover;
-    background-position: center center;
-  }
   .hero h1 {
     padding-right: 0;
   }
   .skills-text {
     padding-top: 48px !important;
   }
-  #skills div:nth-child(2) {
+  .skills-container {
     padding-bottom: 0 !important;
   }
 }

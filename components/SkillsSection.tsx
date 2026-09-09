@@ -19,21 +19,21 @@ export default function SkillsSection() {
       <div className="container">
         <div className="flex flex-wrap justify-center">
 
-          {/* Texte gauche */}
-          <div className="w-full lg:w-5/12 flex justify-center items-center">
-            <p className="p-2 info sm:hidden lg:block lg:mr-12 text-white skills-text">
-              Freelance passionné de création visuelle, je conçois des sites web et des applications
-              sur mesure avec Next.js et Symfony, en optimisant mon développement grâce aux outils
-              d&apos;IA. Mon objectif est d&apos;aider les artisans et les PME à propulser leur image
-              et leur activité en ligne.
-            </p>
-          </div>
-
           {/* Anneaux animés (ex-grille de cartes) */}
           <div id="competences_items" className="w-full lg:w-7/12 flex flex-wrap skills-container overflow-hidden">
 
             <SkillsOrbit />
 
+          </div>
+
+          {/* Texte droite */}
+          <div className="w-full lg:w-5/12 flex justify-center items-center">
+            <p className="p-2 info sm:hidden lg:block lg:ml-12 text-white skills-text">
+              Freelance passionné de création visuelle, je conçois des sites web et des applications
+              sur mesure avec Next.js et Symfony, en optimisant mon développement grâce aux outils
+              d&apos;IA. Mon objectif est d&apos;aider les artisans et les PME à propulser leur image
+              et leur activité en ligne.
+            </p>
           </div>
         </div>
       </div>
