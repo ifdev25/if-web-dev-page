@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Plan du site */}
           <div className="w-full lg:w-1/3 mb-12 lg:mb-0 py-4">
             <h4 className="uppercase mb-6 text-shadow-dark">PLAN DU SITE</h4>
-            <ul className="list-none text-lg mb-0 p-0">
+            <ul className="list-none mb-0 p-0">
               <li><a href="/#skills"   className="text-white">Compétences</a></li>
               <li><a href="/#services" className="text-white">Services</a></li>
               <li><a href="/#contact"  className="text-white">Contact</a></li>
@@ -45,7 +45,7 @@ export default function Footer() {
           {/* À propos */}
           <div className="w-full lg:w-1/3 py-4">
             <h4 className="uppercase mb-6 text-shadow-dark">À propos</h4>
-            <p className="text-lg">
+            <p>
               J&apos;aide les artisans du bâtiment, PME et industriels à promouvoir leur activité en
               ligne. Démarquez-vous en collaborant avec un professionnel indépendant passionné du
               design et du web.

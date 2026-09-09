@@ -5,7 +5,7 @@ export default function SkillsSection() {
     <section className="relative bg-black" id="skills">
 
       <div className="container text-white text-center ad">
-        <p className="info text-2xl text-white">
+        <p className="info text-white">
           Vous souhaitez mettre en avant votre activité sur le web ? Démarquez-vous avec des
           créations uniques. Boostez votre visibilité dès aujourd&apos;hui.
         </p>
@@ -21,7 +21,7 @@ export default function SkillsSection() {
 
           {/* Texte gauche */}
           <div className="w-full lg:w-5/12 flex justify-center items-center">
-            <p className="p-2 text-2xl info sm:hidden lg:block lg:mr-12 text-white skills-text">
+            <p className="p-2 info sm:hidden lg:block lg:mr-12 text-white skills-text">
               Freelance passionné de création visuelle, je conçois des sites web et des applications
               sur mesure avec Next.js et Symfony, en optimisant mon développement grâce aux outils
               d&apos;IA. Mon objectif est d&apos;aider les artisans et les PME à propulser leur image

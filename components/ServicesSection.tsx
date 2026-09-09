@@ -12,7 +12,7 @@ export default function ServicesSection() {
     <section className="bg-night pb-12">
       <div className="container" id="services">
         <div className="container text-white text-center ad slide-in from-left">
-          <p className="info text-2xl text-white">
+          <p className="info text-white">
             Pour concevoir des visuels et des sites personnalisés répondant aux besoins de mes
             clients, je collabore étroitement avec eux, garantissant ainsi une présence en ligne
             digne d&apos;un professionnel. Profitez dès maintenant de nos tarifs de lancement !
@@ -30,7 +30,7 @@ export default function ServicesSection() {
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
             <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour conception de logos et visuels">
               <div className="p-6 bg-black/75 rounded-lg card flex-fill">
-                <h3 className="text-center m-4 text-white font-semibold">
+                <h3 className="text-center m-4 text-white">
                   Conception Logos et visuels personnalisés
                 </h3>
                 <p className="text-center text-white/75">à partir de</p>
@@ -54,7 +54,7 @@ export default function ServicesSection() {
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
             <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour site vitrine WordPress ou Symfony">
               <div className="p-6 bg-black/75 rounded-lg card flex-fill head-2">
-                <h3 className="text-center my-4 text-white font-semibold">
+                <h3 className="text-center my-4 text-white">
                   Site Vitrine Wordpress ou Symfony
                 </h3>
                 <p className="text-center text-white/75">à partir de</p>
@@ -79,7 +79,7 @@ export default function ServicesSection() {
           <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
             <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour création de site e-commerce WordPress">
               <div className="p-6 bg-black/75 text-white rounded-lg card flex-fill flex flex-col head-3">
-                <h3 className="text-center my-4 text-white font-semibold">
+                <h3 className="text-center my-4 text-white">
                   Création Site e-commerce Wordpress
                 </h3>
                 <p className="text-center text-white/75">à partir de</p>

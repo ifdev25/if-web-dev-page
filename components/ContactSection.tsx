@@ -111,7 +111,7 @@ export default function ContactSection() {
               </div>
             )}
 
-            <h3 className="my-6 text-shadow-light font-semibold mx-4">Améliorez votre image !</h3>
+            <h3 className="my-6 text-shadow-light mx-4">Améliorez votre image !</h3>
 
             <form onSubmit={handleSubmit} className="mx-4" noValidate>
 
