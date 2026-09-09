@@ -36,6 +36,23 @@ html {
   --bg-color: #ebebeb;
   --dark-shadow: 5px 5px black;
   --ligth-shadow: 5px 5px var(--violet);
+  /* Gouttiere unique du site : croit continument avec la largeur.
+     16px sous ~460px, puis 3.5vw, plafonnee a 48px a partir de ~1370px.
+     Tout ce qui borde l ecran (container, bouton burger) s y aligne. */
+  --gutter: clamp(16px, 3.5vw, 48px);
+}
+
+/* ---- Container : remplace le plugin Tailwind (desactive dans tailwind.config)
+   Paliers fixes supprimes : la gouttiere ne saute plus a chaque breakpoint. ---- */
+.container {
+  width: 100%;
+  max-width: calc(1320px + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+/* Containers imbriques (Services, Skills) : pas de double gouttiere */
+.container .container {
+  padding-inline: 0;
 }
 
 body {
@@ -46,7 +63,16 @@ body {
 }
 
 /* ---- Titres — Tailwind Preflight remet font-size: inherit sur h1-h6 ---- */
-h1 { font-size: 2.5rem;  font-weight: 500; line-height: 1.2; }
+/* h1 en Fugaz One (Google Fonts, chargee par next/font dans layout.tsx).
+   La font n existe qu en 400 : on fige la graisse pour ne pas declencher
+   de gras synthetique, et on passe le titre en majuscules. */
+h1 {
+  font-family: var(--font-fugaz), 'GT Walsheim Pro', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
 h2 { font-size: 2rem;    font-weight: 700; line-height: 1.2; }
 h3 { font-size: 1.75rem; font-weight: 500; line-height: 1.2; }
 h4 { font-size: 1.5rem;  font-weight: 500; line-height: 1.2; }
@@ -122,9 +148,11 @@ nav {
 .menu-btn {
   position: absolute;
   z-index: 10000 !important;
-  /* cale dans le coin : l'icone affleure le haut du logo (nav py-4 = 16px) et le bord droit */
+  /* cale dans le coin : l'icone affleure le haut du logo (nav py-4 = 16px).
+     A droite, on vise la meme gouttiere que le logo : le bouton fait 68px pour
+     une icone de 48px, donc 10px de marge optique de chaque cote a retrancher. */
   top: 8px;
-  right: 0;
+  right: calc(var(--gutter) - 10px);
   height: 68px;
   width: 68px;
   display: flex;
@@ -223,15 +251,24 @@ a.nav-link:hover {
   flex: 1;
   position: relative;
   z-index: 7000;
+  /* 30px a 360px, 50px des 576px (le burger a besoin d air au-dessus du titre).
+     Au-dela de 992px la marge redescend a 25px : voir la media query. */
+  margin-top: clamp(30px, 9.26vw - 3.33px, 50px);
 }
 .hero img {
   max-width: 450px !important;
+  /* Recentrage du logo sur grand ecran : 0 jusqu a 1200px, -100px a partir de
+     1400px, lineaire entre les deux. Pas de !important, sinon cette regle
+     ecraserait le translate(-50%, -50%) de .mobile-banner. */
+  transform: translateX(clamp(-100px, 600px - 50vw, 0px));
 }
 .hero h1 {
-  /* Taille fluide : croit continument avec la largeur, plus d inversion entre
-     les paliers. 38px plancher (lisible et sans debordement des 320px), 70px
-     plafond atteint vers 1220px (taille desktop actuelle inchangee). */
-  font-size: clamp(38px, 3.6vw + 26px, 70px);
+  /* Taille fluide : croit continument avec la largeur, pas d inversion entre
+     les paliers. 38px plancher (PROPULSEE ! tient dans 320px), 80px plafond
+     atteint vers 1380px (taille validee en 16/9 desktop). */
+  font-size: clamp(38px, 4.2vw + 22px, 80px);
+  /* filet de securite : aucun mot ne peut deborder de la colonne */
+  overflow-wrap: break-word;
 }
 /* .hero .mobile-banner : spécificité supérieure à `.hero img { max-width: 450px !important }` */
 .hero .mobile-banner {
@@ -265,16 +302,27 @@ a.nav-link:hover {
 .trait-shadow-dark {
   box-shadow: var(--dark-shadow);
 }
-.hero p {
-  opacity: 0.6;
-}
+/* Bouton fluide : chaque clamp part de la valeur mobile (plancher, atteinte
+   sous ~360px) et rejoint la valeur desktop (plafond) a 769px. Le palier de
+   576px qui faisait sauter la police de 13 a 18px a disparu.
+   gap et letter-spacing sont en !important : .btn, declare plus bas, a la meme
+   specificite et gagnerait sinon par ordre de source. */
 .hero-button {
-  padding: 12px 20px !important;
+  padding: clamp(10px, 0.49vw + 8.24px, 12px) clamp(12px, 1.96vw + 4.96px, 20px) !important;
   border-radius: 10px !important;
-  font-size: 18px !important;
+  font-size: clamp(10px, 1.71vw + 4.84px, 18px) !important;
   font-weight: 500 !important;
   text-transform: uppercase !important;
   line-height: 1.2 !important;
+  gap: clamp(6px, 0.49vw + 4.24px, 8px) !important;
+  letter-spacing: clamp(-0.2px, 0.049vw - 0.376px, 0px) !important;
+  white-space: nowrap !important;
+}
+/* l icone suit la meme progression que le texte : 15px -> 18px */
+.hero-button svg {
+  width: clamp(15px, 0.73vw + 12.36px, 18px);
+  height: clamp(15px, 0.73vw + 12.36px, 18px);
+  flex-shrink: 0;
 }
 .red-button {
   background-color: #c91414 !important;
@@ -309,6 +357,11 @@ a.nav-link:hover {
 /* Compétences : la skyline du hero fait déjà le retrait haut */
 #skills .ad {
   padding-top: 0;
+  /* Largeur de ligne calee sur 3 lignes de texte. Elle se resserre en continu
+     jusqu a 440px vers 768px au lieu de tomber d un coup a cette largeur ; le
+     plafond de 900px la rend inoperante sous ~640px, ou c est deja le container
+     qui borne le texte. La remontee vers 560px est portee par la media query. */
+  max-width: clamp(440px, 1400px - 125vw, 900px);
 }
 
 /* ---- Ville de nuit : socle figé du bloc Compétences ----
@@ -316,7 +369,8 @@ a.nav-link:hover {
    de #skills (les deux se déplacent ensemble) et le contenu du hero ne peut
    plus passer dessous. --skyline-gap = garde-fou boutons / fusée. */
 .city-skyline {
-  --skyline-gap: 48px;
+  /* 36px sur mobile, 48px a partir de 1200px, en continu entre les deux */
+  --skyline-gap: clamp(36px, 1.92vw + 24.92px, 48px);
   position: relative;
   z-index: 5000;
   width: 100%;
@@ -353,81 +407,206 @@ a.nav-link:hover {
 #skills {
   overflow-x: hidden;
 }
-/* les h4 sont tous dans une carte : seule la couleur n'est pas reprise par .skills .card h4 */
-.skills h4 {
-  color: whitesmoke;
-}
 .skills-container {
   padding-bottom: 50px;
 }
-.skills .card {
-  text-align: center;
-  max-width: 280px;
-  box-shadow: 0px -5px whitesmoke;
-  border-top: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-left: 3px solid transparent;
-  border-radius: 10px;
-  color: var(--third-color);
-  transition: 1s;
-  position: relative;
-}
-.skills .card h4 {
-  padding-top: 30px;
-  padding-bottom: 10px;
-  font-size: 25px;
-  font-weight: 500;
-}
-.skills .card p {
-  line-height: 1.7;
-  font-size: 16px;
-  color: var(--third-color);
-}
-.skills .card .skill-icon {
+/* ---- Compétences : anneaux animés (à la place des cartes) ----
+   Tout part de --ringsize : anneaux, ronds blancs et logos en dérivent, donc
+   une seule valeur suffit à redimensionner l'ensemble (voir la media query
+   >= 992px, où la colonne ne fait plus que 7/12 du container). */
+.rings-wrap {
+  --ringsize: clamp(207px, 66.7vw, 345px);
+  --ringwidth: 0.06;
+  /* diamètre extérieur réel d'un anneau (contenu + les 2 bordures) */
+  --ringouter: calc(var(--ringsize) * (1 + var(--ringwidth) * 2));
+  --dotsize: calc(var(--ringsize) * 0.22);
+  /* Palette reprise du site : le rouge signature, le violet du halo de
+     .bg-night::before, le bleu --main-color et le blanc des traits.
+     Les teintes sont volontairement claires : en mix-blend-mode screen, un ton
+     sombre (l'ancien #1b184d) ne ressort presque pas sur le fond noir. */
+  --ring-red: #c91414;
+  --ring-violet: #c184fd;
+  --ring-blue: var(--main-color);
+  /* 0.38 et pas 0.5 : au-dela, le blanc delave les trois autres anneaux en
+     screen et l'ensemble vire au rose pale */
+  --ring-white: rgba(255, 255, 255, 0.38);
+  /* Ellipse : on aplatit verticalement (--flat) PUIS on bascule (--tilt).
+     Dans cet ordre, le grand axe part en diagonale bas-gauche -> haut-droite. */
+  --tilt: -45deg;
+  --flat: 0.55;
+  /* teinte commune aux 4 logos (les SVG sont en currentColor) : le bleu nuit
+     du site, le meme que le fond .bg-night */
+  --logo-color: #121244;
+  width: 100%;
   display: flex;
   justify-content: center;
+  /* les ronds et leur halo débordent de l'anneau : on leur réserve la place,
+     sinon le overflow-hidden du bloc parent les coupe */
+  padding-block: calc(var(--dotsize) * 0.9);
+}
+.rings-stage {
+  position: relative;
+  width: var(--ringouter);
+  height: var(--ringouter);
+}
+.rings-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border-style: solid;
+  /* box-sizing: border-box (reset global) : le bord est compris dans --ringouter */
+  border-width: calc(var(--ringsize) * var(--ringwidth));
+  mix-blend-mode: screen;
+  animation-name: rings-sway;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+/* Les 4 anneaux partagent une seule animation : seules leurs variables les
+   distinguent. --sway-a / --sway-b sont l'ecart d'inclinaison aux deux extremes
+   de l'oscillation, --flat leur aplatissement propre. Sans ces ecarts les 4
+   anneaux se superposeraient au pixel pres et le screen les fondrait en un seul
+   trait blanchatre : c'est le decalage qui fait le ruban multicolore. */
+.rings-red {
+  border-color: var(--ring-red);
+  --sway-a: 10deg;
+  --sway-b: -10deg;
+  --flat: 0.58;
+}
+.rings-violet {
+  border-color: var(--ring-violet);
+  --sway-a: -13deg;
+  --sway-b: 5deg;
+  --flat: 0.50;
+}
+.rings-blue {
+  border-color: var(--ring-blue);
+  --sway-a: 4deg;
+  --sway-b: -16deg;
+  --flat: 0.62;
+}
+.rings-white {
+  border-color: var(--ring-white);
+  --sway-a: -7deg;
+  --sway-b: 12deg;
+  --flat: 0.54;
+}
+
+/* --- Ronds blancs en orbite ------------------------------------------------
+   Les ronds parcourent l'ellipse de reference (--tilt / --flat portes par
+   .rings-wrap) pendant que les anneaux oscillent autour : les deux sont
+   volontairement decouples, les ronds traversent donc le ruban colore au lieu
+   de suivre un trait precis. Les 4 ronds partagent une seule animation,
+   décalée d'un quart de tour chacun.
+
+   Le décalage passe par --phase, un délai négatif qui démarre l'animation déjà
+   avancée : -1.5s sur 6s = 90deg. Comme --phase est hérité par .rings-dot, la
+   correction du rond est décalée d'autant et ne peut pas se désynchroniser de
+   son orbite.
+
+   Ce calque reste hors des anneaux : il n'hérite donc pas du mix-blend-mode
+   screen, qui empêcherait tout pixel sombre d'un logo de rester sombre.      */
+.rings-orbit {
+  --phase: 0s;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  animation-name: rings-orbit-spin;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-delay: var(--phase);
+  animation-iteration-count: infinite;
+}
+.rings-phase-1 {
+  --phase: -1.5s;
+}
+.rings-phase-2 {
+  --phase: -3s;
+}
+.rings-phase-3 {
+  --phase: -4.5s;
+}
+.rings-dot {
+  position: absolute;
+  width: var(--dotsize);
+  height: var(--dotsize);
+  border-radius: 50%;
+  background: #fff;
+  /* centré horizontalement, posé au milieu de l'épaisseur du trait */
+  left: calc(50% - var(--dotsize) / 2);
+  top: calc(var(--ringsize) * var(--ringwidth) / 2 - var(--dotsize) / 2);
+  /* Annule exactement la transformation de l'orbite (bascule + aplatissement +
+     rotation), dans l'ordre inverse : le rond reste un cercle parfait et droit,
+     seule sa POSITION suit l'ellipse. Le logo n'a donc plus rien a corriger. */
+  animation-name: rings-dot-upright;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-delay: var(--phase);
+  animation-iteration-count: infinite;
+  display: flex;
   align-items: center;
-  width: 75px;
-  height: 75px;
-  color: var(--second-color);
-  background-color: #c91414;
-  position: absolute;
-  top: calc(-75px / 2);
-  transform: rotate(0deg);
-  left: calc(50% - 40px);
-  transition: 1s;
-  border: 3px solid whitesmoke;
-  border-radius: 10px;
+  justify-content: center;
+  box-shadow: 0 0 calc(var(--dotsize) * 0.5) rgba(255, 255, 255, 0.55),
+              0 0 calc(var(--dotsize) * 1.1) rgba(255, 255, 255, 0.28);
 }
-.skills .card img {
-  width: 75px;
-  height: 75px;
-  background-color: #c91414;
-  position: absolute;
-  top: calc(-75px / 2);
-  transform: rotate(0deg);
-  left: calc(50% - 40px);
-  transition: 1s;
-  border: 3px solid whitesmoke;
-  border-radius: 10px;
+/* Plus d'animation ici : .rings-dot annule deja toute la chaine de l'orbite,
+   le logo herite donc d'un repere droit et non deforme. */
+.rings-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  color: var(--logo-color);
 }
-.skills .card:hover {
-  background-color: transparent;
-  border: 3px solid whitesmoke;
+.rings-logo-ai {
+  font-size: calc(var(--dotsize) * 0.42);
+  font-weight: 700;
+  letter-spacing: calc(var(--dotsize) * -0.015);
 }
-.skills .card:hover .skill-icon,
-.skills .card:hover img {
-  transform: rotate(360deg);
-  background-color: var(--bg-color);
+.rings-logo-react {
+  display: block;
+  width: calc(var(--dotsize) * 0.66);
+  height: auto;
 }
-.skills .card:hover p {
-  color: whitesmoke;
-  transition: 1s;
+.rings-logo-symfony {
+  display: block;
+  width: calc(var(--dotsize) * 0.74);
+  height: auto;
 }
+.rings-logo-wordpress {
+  display: block;
+  width: calc(var(--dotsize) * 0.68);
+  height: auto;
+}
+
+/* Rotation commune des 4 orbites. rotate(--tilt) scale(--flat) rotate(A) se lit
+   de droite a gauche : le rond tourne d'abord sur un cercle, ce cercle est
+   aplati, puis bascule a -45deg. Vitesse angulaire constante (linear) : c'est
+   ce qui garantit un ecart regulier entre les ronds tout au long du tour. */
+@keyframes rings-orbit-spin {
+  0%   { transform: rotate(var(--tilt)) scale(1, var(--flat)) rotate(0deg); }
+  100% { transform: rotate(var(--tilt)) scale(1, var(--flat)) rotate(360deg); }
+}
+/* Inverse exact de rings-orbit-spin, facteurs en ordre inverse. Meme duree,
+   meme --phase, meme linear : la composition des deux vaut l'identite a chaque
+   instant, quel que soit l'avancement de l'animation. */
+@keyframes rings-dot-upright {
+  0%   { transform: rotate(0deg) scale(1, calc(1 / var(--flat))) rotate(calc(-1 * var(--tilt))); }
+  100% { transform: rotate(-360deg) scale(1, calc(1 / var(--flat))) rotate(calc(-1 * var(--tilt))); }
+}
+/* Oscillation des anneaux autour de --tilt : la diagonale reste lisible, mais
+   les 4 traits ne se recouvrent jamais tous en meme temps. */
+@keyframes rings-sway {
+  0%, 100% { transform: rotate(calc(var(--tilt) + var(--sway-a))) scale(1, var(--flat)); }
+  50%      { transform: rotate(calc(var(--tilt) + var(--sway-b))) scale(1, var(--flat)); }
+}
+
 .info {
   opacity: 0.6;
-  font-size: 20px;
+  /* 16px sous 576px, 20px a partir de 1200px, en continu entre les deux.
+     Remplace les surcharges .hero p / #skills p / #services p qui forcaient
+     16px !important et sautaient a 20px a 992px. */
+  font-size: clamp(16px, 0.64vw + 12.31px, 20px);
 }
 
 /* ---- Services ---- */
@@ -438,6 +617,19 @@ a.nav-link:hover {
 .flex-fill {
   flex: 1 !important;
   border-radius: 0 0 10px 10px !important;
+}
+/* 300px sur mobile puis ouverture continue jusqu a la largeur de la colonne
+   vers 768px, au lieu de passer d un coup de 300px a pleine largeur a 576px.
+   Au-dela de 768px la carte occupe toujours 100% de sa colonne. */
+.services .flex-fill {
+  max-width: clamp(300px, 216vw - 944px, 100%);
+}
+/* Gouttiere entre les cartes. 1 colonne sous 768px. Entre 768 et 1200px les
+   cartes restent a 2 par ligne : la marge grandit en continu de 8 a 48px au
+   lieu de sauter a 992px. A 1200px on passe a 3 colonnes, la marge redescend
+   avec le changement de grille (voir les media queries). */
+.services .card {
+  margin: 16px;
 }
 section .services {
   position: relative;
@@ -514,22 +706,19 @@ footer .container {
   color: #121244;
 }
 
-/* ---- Media queries ---- */
-@media screen and (max-width: 992px) {
-  .city-skyline {
-    --skyline-gap: 36px;
-  }
+/* ---- Media queries ----
+   Les bornes hautes sont a .98px : les breakpoints Tailwind sont des
+   min-width, une borne a 992px pile ferait s appliquer les deux regles a la
+   fois sur un ecran de 992px exactement.
+   Il ne reste ici que de vrais changements de mise en page (colonnes, blocs
+   masques, image de fond). Tout ce qui est une taille ou un espacement est
+   passe en clamp() plus haut, pour croitre en continu. */
+@media screen and (max-width: 991.98px) {
   .hero * {
     text-align: center;
   }
-  .hero {
-    margin-top: 50px !important;
-  }
   .hero h1 {
     padding-right: 0;
-  }
-  .hero p {
-    font-size: 16px;
   }
   .hero div {
     justify-content: center;
@@ -537,46 +726,21 @@ footer .container {
   .hero div:nth-child(2) {
     display: none !important;
   }
-  #skills p {
-    font-size: 16px !important;
-  }
-  #services p {
-    font-size: 16px !important;
-  }
+  /* la colonne passe de 1/2 a pleine largeur : 50% ici = 100% d une demi
+     colonne, l image garde donc exactement la meme largeur rendue */
   #contact img {
     max-width: 50%;
   }
-  #services .price {
-    font-size: 35px !important;
-  }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575.98px) {
   section .services {
     background-image: url('/img/vertical-white-ribbon.png');
     background-size: cover;
     background-position: center center;
   }
-  .hero {
-    margin-top: 30px !important;
-  }
   .hero h1 {
     padding-right: 0;
-  }
-  .hero-button {
-    font-size: clamp(10px, 3.1vw, 13px) !important;
-    padding: 10px 12px !important;
-    gap: 6px !important;
-    white-space: nowrap !important;
-    letter-spacing: -0.2px !important;
-  }
-  .hero-button svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-  }
-  .services .flex-fill {
-    max-width: 300px;
   }
   .skills-text {
     padding-top: 48px !important;
@@ -584,16 +748,16 @@ footer .container {
   #skills div:nth-child(2) {
     padding-bottom: 0 !important;
   }
-  #skills .card {
-    margin-top: 48px;
-  }
 }
 
 @media screen and (min-width: 768px) {
-  /* Blocs d'intro : largeur calée pour que chaque texte tombe sur 3 lignes
-     (mesuré à 20px/30px : Compétences tient en 3 lignes de 460 à 660px, Services à partir de 770px) */
+  /* Blocs d'intro : largeur calée pour que chaque texte tombe sur 3 lignes.
+     Compétences reprend a 440px (la valeur atteinte par le clamp de base a
+     768px) et rouvre jusqu a 560px a 992px, sans marche.
+     Services : 820px est toujours superieur a la largeur du container a cette
+     taille, la regle ne mord qu au-dela de ~880px, donc aucun saut. */
   #skills .ad {
-    max-width: 560px;
+    max-width: clamp(440px, 53.57vw + 28.6px, 560px);
   }
   #services .ad {
     max-width: 820px;
@@ -603,13 +767,9 @@ footer .container {
     line-height: 1.5;
     min-height: calc(3 * 1.5em);
   }
-}
-
-/* Tablette : #skills p / #services p forcent la police à 16px, Compétences doit être
-   resserré pour rester sur 3 lignes (Services est déjà bridé par le container à 720px) */
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  #skills .ad {
-    max-width: 440px;
+  /* 2 cartes par ligne : la gouttiere grandit avec la place disponible */
+  .services .card {
+    margin: clamp(8px, 9.26vw - 63.11px, 48px);
   }
 }
 
@@ -617,17 +777,23 @@ footer .container {
   .mobile-banner {
     display: none !important;
   }
-}
-
-@media screen and (min-width: 1200px) {
-  .hero img {
-    transform: translateX(-20px) !important;
+  /* la colonne des anneaux passe a 7/12 du container : l anneau suit la largeur
+     reellement disponible au lieu de la fenetre entiere. Le plancher du clamp
+     vaut exactement la taille atteinte sous 992px, la bascule est invisible. */
+  .rings-wrap {
+    --ringsize: clamp(345px, 8.92vw + 256.46px, 379px);
+  }
+  /* le bloc banner remonte progressivement : 50px a 992px (valeur du clamp de
+     base juste avant), 25px a partir de 1400px */
+  .hero {
+    margin-top: clamp(25px, 110.78px - 6.13vw, 50px);
   }
 }
 
-@media screen and (min-width: 1400px) {
-  .hero img {
-    transform: translateX(-100px) !important;
+@media screen and (min-width: 1200px) {
+  /* 3 cartes par ligne : la gouttiere repart de 16px avec la nouvelle grille */
+  .services .card {
+    margin: 16px;
   }
 }
 

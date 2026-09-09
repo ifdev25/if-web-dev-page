@@ -83,8 +83,8 @@ export default function ContactSection() {
   return (
     <section className="bg-black" id="contact">
       <div className="flex flex-col container">
-        <h2 className="text-white mt-12 uppercase ml-4 text-shadow-light">Contact</h2>
-        <span className="divider-separator text-center mt-6 ml-4 trait-shadow-light" />
+        <h2 className="text-white mt-12 uppercase text-shadow-light">Contact</h2>
+        <span className="divider-separator text-center mt-6 trait-shadow-light" />
       </div>
 
       <div className="container text-white">

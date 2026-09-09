@@ -15,18 +15,14 @@ const config: Config = {
       xl:  "1200px",
       "2xl": "1400px",
     },
-    container: {
-      center: true,
-      padding: "0.75rem",
-      screens: {
-        sm:    "540px",
-        md:    "720px",
-        lg:    "960px",
-        xl:    "1140px",
-        "2xl": "1320px",
-      },
-    },
     extend: {},
+  },
+  // .container est defini a la main dans app/globals.css (gouttiere fluide via
+  // --gutter, au lieu des paliers fixes de Tailwind qui faisaient sauter le
+  // padding de 12px a 95px selon la largeur). Le plugin est desactive pour
+  // qu il n y ait qu une seule source de verite.
+  corePlugins: {
+    container: false,
   },
   plugins: [],
 };

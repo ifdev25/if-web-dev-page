@@ -64,7 +64,7 @@ export default function HeroSection() {
           <div className="hero flex flex-wrap w-full mb-4 items-center">
 
             <div className="text-white flex flex-col flex-1 lg:flex-[3]">
-              <h1 className="font-bold my-4 text-shadow-dark">
+              <h1 className="my-4 text-shadow-dark">
                 Votre <span className="highlighted">Image</span> de marque propulsée&nbsp;!
               </h1>
               <p className="info">
