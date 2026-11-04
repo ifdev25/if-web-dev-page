@@ -73,7 +73,7 @@ export default function ContactSection({ t }: { t: Dict["contact"] }) {
   };
 
   return (
-    <section className="section bg-black" id="contact">
+    <section className="section bg-night" id="contact">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">{t.eyebrow}</span>

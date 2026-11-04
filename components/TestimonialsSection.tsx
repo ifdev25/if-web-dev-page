@@ -13,6 +13,8 @@ export default function TestimonialsSection({ t }: { t: Dict["testimonials"] }) 
           <span className="eyebrow">{t.eyebrow}</span>
           <h2 className="text-white">{t.title}</h2>
           <p className="lead">{t.lead}</p>
+          {/* avis fictifs : la mention doit rester visible tant qu'ils ne sont pas réels */}
+          <p className="demo-note" role="note">{t.demo}</p>
         </div>
       </div>
 

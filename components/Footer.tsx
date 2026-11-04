@@ -17,7 +17,7 @@ const WhatsAppIcon = () => (
 
 export default function Footer({ t }: { t: Dict["footer"] }) {
   return (
-    <footer className="text-center bg-night pt-12">
+    <footer className="text-center bg-black pt-12">
       <div className="container pt-12">
         <div className="flex flex-wrap text-white">
 
