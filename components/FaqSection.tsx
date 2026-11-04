@@ -2,7 +2,7 @@ import type { Dict } from "@/lib/i18n";
 
 export default function FaqSection({ t }: { t: Dict["faq"] }) {
   return (
-    <section className="section bg-night" id="faq">
+    <section className="section bg-black" id="faq">
       <div className="container relative">
         <div className="section-head">
           <span className="eyebrow">{t.eyebrow}</span>

@@ -93,13 +93,15 @@ const fr = {
       { title: "Mise en ligne", text: "Hébergement, nom de domaine, référencement : je m'occupe de la technique, vous récoltez les contacts." },
     ],
   },
-  // ⚠ TÉMOIGNAGES FICTIFS (maquette) : à remplacer par de vrais avis clients avant la mise en prod.
+  // ⚠ TÉMOIGNAGES FICTIFS (démonstration) : affichés en prod uniquement avec la mention `demo`.
   // Publier de faux avis présentés comme réels = pratique commerciale trompeuse (Code de la consommation).
+  // Avec de vrais avis : remplacer `items` et supprimer `demo` dans les trois langues.
   testimonials: {
     eyebrow: "Témoignages",
     title: "Ils m'ont fait confiance",
     lead: "Artisans, commerçants et PME : ce qu'ils retiennent de notre collaboration.",
     rating: "Note : 5 sur 5",
+    demo: "Exemples fictifs : cette section montre le rendu des avis clients, ce ne sont pas de vrais témoignages.",
     items: [
       { name: "Karim B.", role: "Plombier-chauffagiste, Lyon", quote: "Je n'avais aucun site. Trois semaines plus tard, j'avais un site propre et mes premiers appels via Google. Tout m'a été expliqué simplement." },
       { name: "Sophie M.", role: "Fleuriste, Annecy", quote: "Le logo et les cartes de visite ont changé l'image de ma boutique. Mes clientes m'en parlent encore." },
@@ -240,6 +242,7 @@ const en: Dict = {
     title: "They trusted me",
     lead: "Tradespeople, shop owners and small businesses: what they remember from working together.",
     rating: "Rating: 5 out of 5",
+    demo: "Sample reviews: this section shows how client reviews will look, these are not real testimonials.",
     items: [
       { name: "Karim B.", role: "Plumber & heating engineer, Lyon", quote: "I had no website at all. Three weeks later I had a clean site and my first calls from Google. Everything was explained simply." },
       { name: "Sophie M.", role: "Florist, Annecy", quote: "The logo and business cards changed how my shop is seen. My customers still mention it." },
@@ -378,6 +381,7 @@ const dz: Dict = {
     title: "وثقو فيا",
     lead: "حرفيين، تجار و شركات صغيرة: واش قعدلهم من الخدمة معايا.",
     rating: "التقييم: 5 على 5",
+    demo: "أمثلة برك: هذا القسم يورّي كيفاش يبانو آراء الزبائن، ماشي آراء حقيقية.",
     items: [
       { name: "كريم ب.", role: "بلومبي، ليون", quote: "ما كانش عندي سيت. من بعد ثلاث سمانات، ولّى عندي سيت نقي و جاوني أول التيليفونات من Google. فهّمني كلش بالساهل." },
       { name: "صوفي م.", role: "بائعة ورد، أنسي", quote: "اللوقو و كروت الفيزيت بدّلو الصورة تاع الحانوت تاعي. الزبونات مازال يهدرولي عليهم." },
