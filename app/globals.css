@@ -347,17 +347,8 @@ a.nav-link:hover {
   color: #c91414;
   text-shadow: none;
 }
-.text-shadow-light {
-  text-shadow: var(--ligth-shadow);
-}
 .text-shadow-dark {
   text-shadow: var(--dark-shadow);
-}
-.trait-shadow-light {
-  box-shadow: var(--ligth-shadow);
-}
-.trait-shadow-dark {
-  box-shadow: var(--dark-shadow);
 }
 /* Bouton fluide : chaque clamp part de la valeur mobile (plancher, atteinte
    sous ~360px) et rejoint la valeur desktop (plafond) a 769px. Le palier de
@@ -406,20 +397,6 @@ a.nav-link:hover {
   border: 3px solid whitesmoke !important;
   cursor: pointer;
 }
-/* Bloc d'intro placé avant le titre de section : espace haut = espace bas */
-.ad {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-/* Compétences : la skyline du hero fait déjà le retrait haut */
-#skills .ad {
-  padding-top: 0;
-  /* Largeur de ligne calee sur 3 lignes de texte. Elle se resserre en continu
-     jusqu a 440px vers 768px au lieu de tomber d un coup a cette largeur ; le
-     plafond de 900px la rend inoperante sous ~640px, ou c est deja le container
-     qui borne le texte. La remontee vers 560px est portee par la media query. */
-  max-width: clamp(440px, 1400px - 125vw, 900px);
-}
 
 /* ---- Ville de nuit : socle figé du bloc Compétences ----
    Dernier bloc du header, dans le flux : sa base reste toujours collée au haut
@@ -444,21 +421,7 @@ a.nav-link:hover {
   /* 2px de rab : aucun liséré entre les toits et le bloc noir */
   height: calc(100% + 2px);
 }
-.divider-separator {
-  width: 46px;
-  color: whitesmoke;
-  border-radius: 5px;
-  display: block;
-  border: 3px solid whitesmoke;
-}
 
-/* ---- Base .card (Bootstrap le fournissait, Tailwind ne le fait pas) ---- */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
 
 /* ---- Compétences ---- */
 #skills {
@@ -658,85 +621,13 @@ a.nav-link:hover {
   50%      { transform: rotate(calc(var(--tilt) + var(--sway-b))) scale(1, var(--flat)); }
 }
 
-.info {
-  opacity: 0.6;
-  /* Chapo : un cran au-dessus du texte courant. Remplace les surcharges
-     .hero p / #skills p / #services p qui forcaient 16px !important et
-     sautaient a 20px a 992px. */
-  font-size: var(--fs-lead);
-}
 
-/* ---- Services ---- */
-#services {
-  /* le retrait haut est porté par .ad (bloc d'intro) pour rester symétrique */
-  overflow-x: hidden;
-}
-.flex-fill {
-  flex: 1 !important;
-  border-radius: 0 0 10px 10px !important;
-}
-/* 300px sur mobile puis ouverture continue jusqu a la largeur de la colonne
-   vers 768px, au lieu de passer d un coup de 300px a pleine largeur a 576px.
-   Au-dela de 768px la carte occupe toujours 100% de sa colonne. */
-.services .flex-fill {
-  max-width: clamp(300px, 216vw - 944px, 100%);
-}
-/* Gouttiere entre les cartes. 1 colonne sous 768px. Entre 768 et 1200px les
-   cartes restent a 2 par ligne : la marge grandit en continu de 8 a 48px au
-   lieu de sauter a 992px. A 1200px on passe a 3 colonnes, la marge redescend
-   avec le changement de grille (voir les media queries). */
-.services .card {
-  margin: 16px;
-}
-section .services {
-  position: relative;
-  z-index: revert;
-}
-.services .card {
-  flex: 1;
-  box-shadow: 0px -5px whitesmoke !important;
-  width: 100%;
-  border: 3px solid transparent;
-  transition: ease-in-out 0.3s;
-}
-.services .card:hover {
-  border: 3px solid whitesmoke;
-}
-#services .head-2 {
-  box-shadow: 0px -5px var(--main-color) !important;
-}
-#services .head-2:hover {
-  border: 3px solid var(--main-color);
-}
-#services .head-3 {
-  box-shadow: 0px -5px var(--violet) !important;
-}
-#services .head-3:hover {
-  border: 3px solid var(--violet);
-}
-.services .card div {
-  margin-top: auto;
-}
-/* Le prix est l ancre visuelle de la carte : un cran au-dessus de son titre. */
-.price {
-  color: #c91414;
-  font-size: var(--fs-h2);
-  font-weight: var(--fw-bold);
-  line-height: var(--lh-heading);
-}
-.services li {
-  line-height: var(--lh-loose);
-}
 
 /* ---- Contact ---- */
 #contact {
   padding-bottom: 100px !important;
-}
-#contact input,
-#contact select,
-#contact textarea {
-  border: 3px solid #371479;
-  box-shadow: 0px -5px #371479;
+  /* l image laptop arrive de la droite (slide-in) : sans ca, barre de scroll horizontale */
+  overflow-x: clip;
 }
 
 /* ---- Footer ---- */
@@ -791,33 +682,8 @@ footer .container {
   .hero h1 {
     padding-right: 0;
   }
-  .skills-text {
-    padding-top: 48px !important;
-  }
   .skills-container {
     padding-bottom: 0 !important;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  /* Blocs d'intro : largeur calée pour que chaque texte tombe sur 3 lignes.
-     Compétences reprend a 440px (la valeur atteinte par le clamp de base a
-     768px) et rouvre jusqu a 560px a 992px, sans marche.
-     Services : 820px est toujours superieur a la largeur du container a cette
-     taille, la regle ne mord qu au-dela de ~880px, donc aucun saut. */
-  #skills .ad {
-    max-width: clamp(440px, 53.57vw + 28.6px, 560px);
-  }
-  #services .ad {
-    max-width: 820px;
-  }
-  /* le bloc réserve toujours 3 lignes de hauteur, même si le texte en remplit moins */
-  .ad .info {
-    min-height: calc(3 * var(--lh-body) * 1em);
-  }
-  /* 2 cartes par ligne : la gouttiere grandit avec la place disponible */
-  .services .card {
-    margin: clamp(8px, 9.26vw - 63.11px, 48px);
   }
 }
 
@@ -825,7 +691,7 @@ footer .container {
   .mobile-banner {
     display: none !important;
   }
-  /* la colonne des anneaux passe a 7/12 du container : l anneau suit la largeur
+  /* la colonne des anneaux passe a 6/12 du container : l anneau suit la largeur
      reellement disponible au lieu de la fenetre entiere. Le plancher du clamp
      vaut exactement la taille atteinte sous 992px, la bascule est invisible. */
   .rings-wrap {
@@ -835,13 +701,6 @@ footer .container {
      base juste avant), 25px a partir de 1400px */
   .hero {
     margin-top: clamp(25px, 110.78px - 6.13vw, 50px);
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  /* 3 cartes par ligne : la gouttiere repart de 16px avec la nouvelle grille */
-  .services .card {
-    margin: 16px;
   }
 }
 
@@ -966,3 +825,442 @@ footer .container {
 }
 .btn-close::before { content: '×'; }
 .btn-close:hover { opacity: 1; }
+
+/* ============================================================
+   Refonte — sections, cartes, offres, méthode, FAQ
+   ============================================================ */
+:root {
+  --red: #c91414;
+  --line: rgb(255 255 255 / 0.1);
+  --muted: rgb(255 255 255 / 0.7);
+  --radius: 20px;
+}
+
+.section {
+  padding-block: clamp(64px, 6vw + 40px, 120px);
+  color: #fff;
+}
+/* #skills : la skyline du hero fait deja le retrait haut */
+#skills.section {
+  padding-top: clamp(16px, 2vw, 32px);
+}
+/* le halo de .bg-night ne doit pas passer sur le contenu */
+.bg-night > .container {
+  position: relative;
+}
+
+.section-head {
+  max-width: 720px;
+  margin: 0 auto clamp(40px, 4vw, 64px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--muted);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 12px var(--red);
+}
+
+/* ---- Hero : preuves de confiance sous les boutons ---- */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 8px;
+  list-style: none;
+  padding: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.trust svg {
+  color: var(--red);
+  flex-shrink: 0;
+}
+
+/* ---- Carte vitrée, base commune ---- */
+.glass-card {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2vw, 32px);
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgb(255 255 255 / 0.25);
+}
+.glass-card p {
+  color: var(--muted);
+}
+
+/* ---- Approche ---- */
+.benefit {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.benefit h3 {
+  font-size: var(--fs-h5);
+  margin-bottom: 4px;
+}
+.benefit-icon {
+  flex-shrink: 0;
+  padding: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgb(201 20 20 / 0.15);
+  color: #ff5a5a;
+}
+
+/* ---- Offres ---- */
+.offers {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  align-items: stretch;
+}
+.offer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+.offer.featured {
+  border-color: var(--red);
+  background: linear-gradient(180deg, rgb(201 20 20 / 0.18), rgb(255 255 255 / 0.02));
+}
+.offer-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--red);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.offer h3 {
+  font-size: var(--fs-h4);
+}
+.offer-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--muted);
+}
+.offer-price strong {
+  font-size: var(--fs-h1);
+  line-height: 1;
+  color: #fff;
+}
+.offer-list {
+  list-style: none;
+  padding: 16px 0;
+  margin: 0 0 8px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+}
+.offer-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.offer-list svg {
+  margin-top: 0.3em;
+  flex-shrink: 0;
+  color: #ff5a5a;
+}
+.footnote {
+  margin-top: 32px;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: rgb(255 255 255 / 0.55);
+  font-style: italic;
+}
+
+/* ---- Méthode ---- */
+.steps {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  list-style: none;
+  padding: 0;
+}
+.step h3 {
+  font-size: var(--fs-h5);
+  margin: 12px 0 8px;
+}
+.step-num {
+  font-family: var(--font-fugaz), sans-serif;
+  font-size: var(--fs-h1);
+  line-height: 1;
+  background: linear-gradient(135deg, var(--red), var(--main-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- FAQ : <details> natif, pas de JS ---- */
+.faq {
+  max-width: 820px;
+  margin-inline: auto;
+  display: grid;
+  gap: 12px;
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h5);
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: '+';
+  color: var(--red);
+  transition: transform 0.3s ease;
+}
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq details p {
+  margin-top: 12px;
+}
+
+/* ---- Contact ---- */
+.contact-form {
+  display: grid;
+  gap: 4px;
+}
+.contact-form .form-control {
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+.contact-form .form-control:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgb(201 20 20 / 0.25);
+}
+.contact-form button {
+  justify-self: start;
+}
+
+@media screen and (max-width: 991.98px) {
+  .trust {
+    justify-content: center;
+  }
+}
+
+/* .glass-card est declaree apres .fade-in : sans ca sa transition ecraserait
+   celle de l apparition au scroll */
+.glass-card.fade-in {
+  transition: all 750ms ease-in-out;
+}
+
+/* ============================================================
+   Nav collante (desktop) et sélecteur de langue
+   ============================================================ */
+/* La nav est sortie du <header> (pour rester collee tout le long de la page),
+   mais doit se fondre dans le fond du hero : le header remonte sous elle.
+   --nav-overlap n a pas besoin de valoir la hauteur exacte de la nav, il suffit
+   qu il la depasse : le padding-top identique remet le contenu du hero pile au
+   meme endroit, quelle que soit la valeur. */
+:root {
+  --nav-overlap: 160px;
+}
+.site-nav {
+  z-index: 8000;
+  margin-bottom: calc(-1 * var(--nav-overlap));
+  background-color: transparent;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease,
+    backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+}
+.site-nav + header {
+  padding-top: var(--nav-overlap);
+}
+@media screen and (min-width: 992px) {
+  .site-nav {
+    position: sticky;
+    top: 0;
+  }
+  /* des qu on quitte le haut de page (classe posee par HeroSection) */
+  .site-nav.is-scrolled {
+    background-color: rgb(18 18 68 / 0.65);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+  /* les ancres ne tombent plus sous la nav collée */
+  html {
+    scroll-padding-top: 100px;
+  }
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 999px;
+}
+.lang-switch a {
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.lang-switch a:hover {
+  background-color: rgb(255 255 255 / 0.12);
+}
+.lang-switch a[aria-current] {
+  background-color: #c91414;
+}
+/* menu mobile : fond clair, liens bleus */
+.wrapper-mobile .lang-switch {
+  border-color: #4158d0;
+}
+.wrapper-mobile .lang-switch a {
+  font-size: var(--fs-lead);
+  padding: 6px 16px;
+}
+.wrapper-mobile .lang-switch a[aria-current] {
+  background-color: #4158d0;
+  color: #fff;
+}
+
+/* ---- Version darija (dir="rtl") : ce qui ne se retourne pas tout seul ---- */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+/* le titre arabe est plus long : on annule le recentrage de la fusée, sinon elle mord dessus */
+[dir="rtl"] .hero img:not(.mobile-banner) {
+  transform: none;
+}
+[dir="rtl"] .form-floating > label {
+  left: auto;
+  right: 0;
+  transform-origin: 100% 0;
+}
+[dir="rtl"] .btn-close {
+  right: auto;
+  left: 0.75rem;
+}
+
+/* ============================================================
+   Témoignages — défilement horizontal infini
+   ============================================================ */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  /* les cartes apparaissent et disparaissent en fondu sur les bords */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  animation: marquee 60s linear infinite;
+}
+/* pause pour lire : survol souris ou focus clavier */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+/* en RTL la liste déborde à gauche : on défile dans l'autre sens */
+[dir="rtl"] .marquee-track {
+  animation-name: marquee-rtl;
+}
+@keyframes marquee-rtl {
+  to { transform: translateX(50%); }
+}
+.testimonial {
+  /* marge plutôt que gap : chaque carte porte son espace, le -50 % tombe pile */
+  margin-inline-end: 24px;
+  width: clamp(280px, 80vw, 380px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+  color: #f5b301;
+}
+.testimonial blockquote {
+  flex: 1;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.testimonial-avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), var(--main-color));
+  color: #fff;
+  font-weight: var(--fw-bold);
+}
+.testimonial-author strong,
+.testimonial-author small {
+  display: block;
+}
+.testimonial-author small {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
