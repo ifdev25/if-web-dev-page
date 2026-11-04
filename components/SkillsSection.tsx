@@ -1,40 +1,37 @@
+import { Palette, Zap, MessageSquareText } from "lucide-react";
 import SkillsOrbit from "./SkillsOrbit";
+import type { Dict } from "@/lib/i18n";
 
-export default function SkillsSection() {
+const ICONS = [Palette, Zap, MessageSquareText];
+
+export default function SkillsSection({ t }: { t: Dict["skills"] }) {
   return (
-    <section className="relative bg-black" id="skills">
-
-      <div className="container text-white text-center ad">
-        <p className="info text-white">
-          Vous souhaitez mettre en avant votre activité sur le web ? Démarquez-vous avec des
-          créations uniques. Boostez votre visibilité dès aujourd&apos;hui.
-        </p>
-      </div>
-
-      <div className="flex flex-col justify-center container">
-        <h2 className="text-white uppercase text-shadow-light">Compétences</h2>
-        <span className="divider-separator text-center mt-6 trait-shadow-light" />
-      </div>
-
+    <section className="section relative bg-black" id="skills">
       <div className="container">
-        <div className="flex flex-wrap justify-center">
+        <div className="section-head">
+          <span className="eyebrow">{t.eyebrow}</span>
+          <h2 className="text-white">{t.title}</h2>
+          <p className="lead">{t.lead}</p>
+        </div>
 
-          {/* Anneaux animés (ex-grille de cartes) */}
-          <div id="competences_items" className="w-full lg:w-7/12 flex flex-wrap skills-container overflow-hidden">
-
-            <SkillsOrbit />
-
+        <div className="flex flex-wrap justify-center items-center">
+          <div id="competences_items" className="w-full lg:w-6/12 flex flex-wrap skills-container overflow-hidden">
+            <SkillsOrbit label={t.orbit} />
           </div>
 
-          {/* Texte droite */}
-          <div className="w-full lg:w-5/12 flex justify-center items-center">
-            <p className="p-2 info sm:hidden lg:block lg:ml-12 text-white skills-text">
-              Freelance passionné de création visuelle, je conçois des sites web et des applications
-              sur mesure avec Next.js et Symfony, en optimisant mon développement grâce aux outils
-              d&apos;IA. Mon objectif est d&apos;aider les artisans et les PME à propulser leur image
-              et leur activité en ligne.
-            </p>
-          </div>
+          <ul className="w-full lg:w-6/12 grid gap-4 list-none p-0">
+            {t.benefits.map(({ title, text }, i) => {
+              const Icon = ICONS[i];
+              return (
+              <li key={title} className="glass-card benefit fade-in">
+                <Icon className="benefit-icon" size={28} aria-hidden="true" />
+                <div>
+                  <h3 className="text-white">{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </li>
+            );})}
+          </ul>
         </div>
       </div>
     </section>

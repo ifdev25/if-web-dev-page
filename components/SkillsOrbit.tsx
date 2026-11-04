@@ -5,14 +5,14 @@
  * tout est dimensionné à partir de --ringsize, seule valeur à changer pour
  * agrandir ou réduire l'ensemble (anneaux, ronds et logos suivent).
  */
-export default function SkillsOrbit() {
+export default function SkillsOrbit({ label }: { label: string }) {
   return (
     <div className="rings-wrap fade-in">
       {/* les 4 logos remplacent le texte des cartes : on garde l'info pour les lecteurs d'écran */}
       <div
         className="rings-stage"
         role="img"
-        aria-label="Compétences : React, Symfony, WordPress et outils d'IA"
+        aria-label={label}
       >
         <span className="rings-ring rings-red" />
         <span className="rings-ring rings-violet" />

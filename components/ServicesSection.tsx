@@ -1,116 +1,50 @@
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
+import type { Dict } from "@/lib/i18n";
 
-const CheckItem = ({ text }: { text: string }) => (
-  <li className="text-center flex items-center justify-center gap-2">
-    <Check size={14} className="shrink-0 text-white/75" />
-    {text}
-  </li>
-);
+// la 2e offre (site vitrine) est mise en avant
+const FEATURED = 1;
 
-export default function ServicesSection() {
+export default function ServicesSection({ t }: { t: Dict["services"] }) {
   return (
-    <section className="bg-night pb-12">
-      <div className="container" id="services">
-        <div className="container text-white text-center ad slide-in from-left">
-          <p className="info text-white">
-            Pour concevoir des visuels et des sites personnalisés répondant aux besoins de mes
-            clients, je collabore étroitement avec eux, garantissant ainsi une présence en ligne
-            digne d&apos;un professionnel. Profitez dès maintenant de nos tarifs de lancement !
-          </p>
+    <section className="section bg-night" id="services">
+      <div className="container relative">
+        <div className="section-head">
+          <span className="eyebrow">{t.eyebrow}</span>
+          <h2 className="text-white">{t.title}</h2>
+          <p className="lead">{t.lead}</p>
         </div>
 
-        <div className="flex flex-col justify-center">
-          <h2 className="text-white uppercase text-shadow-dark">Services</h2>
-          <span className="divider-separator text-center mt-6 trait-shadow-dark" />
-        </div>
-
-        <div className="flex flex-wrap justify-center py-6 services">
-
-          {/* Carte 1 — Logos & visuels */}
-          <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour conception de logos et visuels">
-              <div className="p-6 bg-black/75 rounded-lg card flex-fill">
-                <h3 className="text-center m-4 text-white">
-                  Conception Logos et visuels personnalisés
-                </h3>
-                <p className="text-center text-white/75">à partir de</p>
-                <p className="text-center price">50 euros*</p>
-                <ul className="list-none text-white/75 p-0">
-                  <CheckItem text="Création de logos" />
-                  <CheckItem text="Conception de flyers, affiches" />
-                  <CheckItem text="Design de cartes de visite" />
-                  <CheckItem text="Design de bannières et d'images pour les réseaux sociaux" />
-                  <CheckItem text="Design moderne et épuré" />
-                  <CheckItem text="Travail sur mesure" />
-                </ul>
-                <div className="flex justify-center">
-                  <span className="btn hero-button my-4 red-button">un devis ?</span>
-                </div>
-              </div>
+        <div className="offers">
+          {t.offers.map((o, i) => {
+            const featured = i === FEATURED;
+            return (
+            <a
+              key={o.name}
+              href="#contact"
+              className={`glass-card offer fade-in${featured ? " featured" : ""}`}
+              aria-label={`${t.aria} ${o.name}`}
+            >
+              {featured && <span className="offer-badge">{t.badge}</span>}
+              <h3 className="text-white">{o.name}</h3>
+              <p className="offer-pitch">{o.pitch}</p>
+              <p className="offer-price">
+                <small>{t.from}</small>
+                <strong>{o.price}*</strong>
+              </p>
+              <ul className="offer-list">
+                {o.items.map((item) => (
+                  <li key={item}><Check size={16} aria-hidden="true" />{item}</li>
+                ))}
+              </ul>
+              <span className={`btn hero-button ${featured ? "red-button" : "light-button"} justify-center mt-auto`}>
+                {t.cta}
+                <ArrowRight size={18} className="rtl-flip" />
+              </span>
             </a>
-          </div>
-
-          {/* Carte 2 — Site Vitrine */}
-          <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour site vitrine WordPress ou Symfony">
-              <div className="p-6 bg-black/75 rounded-lg card flex-fill head-2">
-                <h3 className="text-center my-4 text-white">
-                  Site Vitrine Wordpress ou Symfony
-                </h3>
-                <p className="text-center text-white/75">à partir de</p>
-                <p className="text-center price">500 euros*</p>
-                <ul className="list-none text-white/75 p-0">
-                  <CheckItem text="Design moderne" />
-                  <CheckItem text="Site Responsive" />
-                  <CheckItem text="1 à 5 pages" />
-                  <CheckItem text="Formulaire de contact" />
-                  <CheckItem text="Optimisation SEO" />
-                  <CheckItem text="Hébergement O2switch" />
-                  <CheckItem text="Optimisation vitesse et performance" />
-                </ul>
-                <div className="flex justify-center">
-                  <span className="btn hero-button my-4 red-button">un devis ?</span>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          {/* Carte 3 — E-commerce */}
-          <div className="w-full md:w-1/2 xl:w-1/3 fade-in flex justify-center">
-            <a href="/#contact" className="flex no-underline" aria-label="Demander un devis pour création de site e-commerce WordPress">
-              <div className="p-6 bg-black/75 text-white rounded-lg card flex-fill flex flex-col head-3">
-                <h3 className="text-center my-4 text-white">
-                  Création Site e-commerce Wordpress
-                </h3>
-                <p className="text-center text-white/75">à partir de</p>
-                <p className="text-center price">900 euros*</p>
-                <ul className="list-none text-white/75 p-0">
-                  <CheckItem text="Design moderne" />
-                  <CheckItem text="Site Responsive" />
-                  <li className="text-center flex items-center justify-center gap-2">
-                    <Check size={14} className="shrink-0 text-white/75" />
-                    Intégration jusqu&apos;à 20 produits
-                  </li>
-                  <CheckItem text="Formulaire de contact" />
-                  <CheckItem text="Optimisation SEO" />
-                  <CheckItem text="Hébergement O2switch" />
-                  <CheckItem text="Optimisation vitesse et performance" />
-                  <CheckItem text="Boutique Woocommerce" />
-                </ul>
-                <div className="flex justify-center">
-                  <span className="btn hero-button my-4 red-button">un devis ?</span>
-                </div>
-              </div>
-            </a>
-          </div>
+          );})}
         </div>
 
-        <div className="container text-white text-center py-12 slide-in from-right">
-          <p className="info italic text-white">
-            (*) Les Tarifs affichés sont à titre indicatifs, un devis devra être réalisé. Les prix
-            sont hors frais d&apos;hébergeur et de nom de domaine. Plusieurs fois sans frais possible.
-          </p>
-        </div>
+        <p className="footnote">{t.footnote}</p>
       </div>
     </section>
   );

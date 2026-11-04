@@ -1,4 +1,7 @@
 import { Mail } from "lucide-react";
+import type { Dict } from "@/lib/i18n";
+
+const ANCHORS = ["#skills", "#services", "#methode", "#faq", "#contact"];
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
@@ -12,7 +15,7 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-export default function Footer() {
+export default function Footer({ t }: { t: Dict["footer"] }) {
   return (
     <footer className="text-center bg-night pt-12">
       <div className="container pt-12">
@@ -20,36 +23,32 @@ export default function Footer() {
 
           {/* Plan du site */}
           <div className="w-full lg:w-1/3 mb-12 lg:mb-0 py-4">
-            <h4 className="uppercase mb-6 text-shadow-dark">PLAN DU SITE</h4>
+            <h4 className="uppercase mb-6 text-shadow-dark">{t.sitemap}</h4>
             <ul className="list-none mb-0 p-0">
-              <li><a href="/#skills"   className="text-white">Compétences</a></li>
-              <li><a href="/#services" className="text-white">Services</a></li>
-              <li><a href="/#contact"  className="text-white">Contact</a></li>
+              {ANCHORS.map((href, i) => (
+                <li key={href}><a href={href} className="text-white">{t.links[i]}</a></li>
+              ))}
             </ul>
           </div>
 
           {/* Réseaux sociaux */}
           <div className="w-full lg:w-1/3 mb-12 lg:mb-0 py-4">
-            <h4 className="uppercase mb-6 text-shadow-dark">Autour du web</h4>
-            <a className="btn-social rounded-full mx-1" href="mailto:ifwebdev@hotmail.com" aria-label="Envoyer un e-mail">
+            <h4 className="uppercase mb-6 text-shadow-dark">{t.social}</h4>
+            <a className="btn-social rounded-full mx-1" href="mailto:ifwebdev@hotmail.com" aria-label={t.mail}>
               <Mail size={20} />
             </a>
-            <a className="btn-social mx-1" href="https://www.linkedin.com/in/ishake-fouhal/" target="_blank" rel="noreferrer" aria-label="Profil LinkedIn">
+            <a className="btn-social mx-1" href="https://www.linkedin.com/in/ishake-fouhal/" target="_blank" rel="noreferrer" aria-label={t.linkedin}>
               <LinkedInIcon />
             </a>
-            <a className="btn-social mx-1" href="https://wa.me/+213542341497?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20mon%20projet%20web." target="_blank" rel="noreferrer" aria-label="Contacter sur WhatsApp">
+            <a className="btn-social mx-1" href={`https://wa.me/+213542341497?text=${encodeURIComponent(t.whatsappText)}`} target="_blank" rel="noreferrer" aria-label={t.whatsapp}>
               <WhatsAppIcon />
             </a>
           </div>
 
           {/* À propos */}
           <div className="w-full lg:w-1/3 py-4">
-            <h4 className="uppercase mb-6 text-shadow-dark">À propos</h4>
-            <p>
-              J&apos;aide les artisans du bâtiment, PME et industriels à promouvoir leur activité en
-              ligne. Démarquez-vous en collaborant avec un professionnel indépendant passionné du
-              design et du web.
-            </p>
+            <h4 className="uppercase mb-6 text-shadow-dark">{t.about}</h4>
+            <p>{t.aboutText}</p>
           </div>
 
         </div>
