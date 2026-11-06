@@ -1,8 +1,8 @@
-import { Palette, Zap, MessageSquareText } from "lucide-react";
+import { Palette, Zap, Smartphone } from "lucide-react";
 import SkillsOrbit from "./SkillsOrbit";
 import type { Dict } from "@/lib/i18n";
 
-const ICONS = [Palette, Zap, MessageSquareText];
+const ICONS = [Palette, Zap, Smartphone];
 
 export default function SkillsSection({ t }: { t: Dict["skills"] }) {
   return (
