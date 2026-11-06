@@ -19,9 +19,9 @@ const fr = {
   meta: {
     title: "If-Web-Dev | Sites web et identité visuelle pour artisans et PME",
     description:
-      "Freelance en création de sites vitrines, boutiques en ligne, logos et visuels. Une présence en ligne professionnelle qui donne confiance à vos clients. Devis gratuit.",
+      "Sites web qui convertissent : copywriting soigné, SEO intégré et apps web et mobile ergonomiques pour artisans et PME. Prix compétitifs, devis gratuit.",
     ogDescription:
-      "Votre image de marque propulsée. Site vitrine, boutique en ligne, logo et visuels sur mesure. Devis gratuit et sans engagement.",
+      "Un site bien écrit, bien référencé, et des applications pensées pour vos clients. Tarifs compétitifs, devis gratuit et sans engagement.",
   },
   nav: {
     links: ["Approche", "Méthode", "Offres", "FAQ"],
@@ -168,9 +168,9 @@ const en: Dict = {
   meta: {
     title: "If-Web-Dev | Websites and visual identity for tradespeople and small businesses",
     description:
-      "Freelance web designer: business websites, online stores, logos and visuals. A professional online presence your customers can trust. Free quote.",
+      "Websites that convert: sharp copywriting, built-in SEO and user-friendly web & mobile apps for small businesses. Competitive prices, free quote.",
     ogDescription:
-      "Your brand image, supercharged. Business website, online store, logo and custom visuals. Free, no-obligation quote.",
+      "A well-written, well-ranked website and apps designed around your customers. Competitive pricing, free no-obligation quote.",
   },
   nav: {
     links: ["Approach", "Process", "Pricing", "FAQ"],
@@ -308,9 +308,9 @@ const dz: Dict = {
   meta: {
     title: "If-Web-Dev | مواقع ويب و لوقو للحرفيين، التجار و الشركات الصغيرة",
     description:
-      "نصاوبلك موقع فيترين، متجر إلكتروني، لوقو و تصاميم للسوشيال ميديا. خدمة احترافية تخلي الزبائن يثقو فيك. الدوفي مجاني.",
+      "مواقع تجيبلك الزبائن: نصوص مكتوبة مليح، SEO باش يلقاوك في Google، و تطبيقات ويب و موبايل ساهلة في الاستعمال. أسعار معقولة و الدوفي مجاني.",
     ogDescription:
-      "خلّي ماركتك تبان! موقع فيترين، متجر إلكتروني، لوقو و تصاميم على حسابك. الدوفي مجاني و بلا التزام.",
+      "موقع مكتوب مليح و يبان في Google، و تطبيقات مخدومة على حساب زبائنك. أسعار معقولة، الدوفي مجاني و بلا التزام.",
   },
   nav: {
     links: ["واش نقدملك", "كيفاش نخدمو", "الأسعار", "الأسئلة"],
@@ -446,7 +446,7 @@ const dz: Dict = {
 
 export const DICTS: Record<Lang, Dict> = { fr, en, dz };
 
-const SITE = "https://www.if-web-dev.com";
+export const SITE = "https://www.if-web-dev.com";
 
 export function pageMetadata(lang: Lang): Metadata {
   const t = DICTS[lang].meta;
@@ -461,8 +461,9 @@ export function pageMetadata(lang: Lang): Metadata {
       url,
       title: t.title,
       description: t.ogDescription,
-      images: [{ url: `${SITE}/img/thumbnail.png`, width: 1200, height: 600 }],
+      images: [{ url: `${SITE}/og/og-${lang}.jpg`, width: 1200, height: 630, alt: t.title }],
     },
+    twitter: { card: "summary_large_image", title: t.title, description: t.ogDescription, images: [`${SITE}/og/og-${lang}.jpg`] },
     alternates: {
       canonical: url,
       languages: { fr: `${SITE}/`, en: `${SITE}/en`, "ar-DZ": `${SITE}/dz`, "x-default": `${SITE}/` },
