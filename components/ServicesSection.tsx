@@ -29,7 +29,8 @@ export default function ServicesSection({ t }: { t: Dict["services"] }) {
               <p className="offer-pitch">{o.pitch}</p>
               <p className="offer-price">
                 <small>{t.from}</small>
-                <strong>{o.price}*</strong>
+                {/* bdi ltr : sinon en RTL "20 000 DA" s'affiche "DA 000 20" */}
+                <strong><bdi dir="ltr">{o.price}*</bdi></strong>
               </p>
               <ul className="offer-list">
                 {o.items.map((item) => (

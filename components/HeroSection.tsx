@@ -1,11 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { Menu, X, ArrowRight, Check } from "lucide-react";
 import { LANGS, LANG_META, type Dict, type Lang } from "@/lib/i18n";
 
 const ANCHORS = ["#skills", "#methode", "#services", "#faq"];
+
+/* Image LCP différente selon l'écran : le bandeau sous 992px, la fusée au-dessus
+   (l'autre est en display:none). `priority` préchargerait les deux partout ;
+   ici chaque preload a son media, et les <img> restent lazy pour que l'image
+   cachée ne soit jamais téléchargée. */
+const BREAKPOINT = 992;
+const banner = getImageProps({ src: "/img/dark-craft.png", width: 400, height: 400, alt: "" }).props;
+const rocket = getImageProps({ src: "/img/hero-logo.webp", width: 480, height: 480, alt: "" }).props;
 
 // langue choisie à la main : prioritaire sur la détection par pays (middleware.ts)
 const rememberLang = (l: Lang) => {
@@ -140,25 +148,16 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
                     <li key={item}><Check size={16} aria-hidden="true" />{item}</li>
                   ))}
                 </ul>
-                <Image
-                  className="mobile-banner"
-                  src="/img/dark-craft.png"
-                  width={400}
-                  height={400}
-                  alt=""
-                />
+                <link rel="preload" as="image" imageSrcSet={banner.srcSet} media={`(max-width: ${BREAKPOINT - 1}px)`} fetchPriority="high" />
+                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+                <img {...banner} className="mobile-banner" fetchPriority="high" />
               </div>
 
-              <div className="flex flex-col items-center lg:items-end flex-1 lg:flex-[2] fade-in">
-                <Image
-                  className="text-center"
-                  src="/img/hero-logo.webp"
-                  width={480}
-                  height={480}
-                  style={{ width: "92%", height: "auto" }}
-                  alt=""
-                  priority
-                />
+              {/* pas de fade-in ici : l'image LCP desktop ne doit pas attendre le JS pour s'afficher */}
+              <div className="flex flex-col items-center lg:items-end flex-1 lg:flex-[2]">
+                <link rel="preload" as="image" imageSrcSet={rocket.srcSet} media={`(min-width: ${BREAKPOINT}px)`} fetchPriority="high" />
+                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+                <img {...rocket} className="text-center" style={{ width: "92%", height: "auto" }} fetchPriority="high" />
               </div>
 
             </div>
@@ -168,7 +167,7 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
               Dans le flux et en dernier : sa base reste toujours collée au haut
               de #skills, et le contenu du hero ne peut plus passer dessous. */}
           <div className="city-skyline">
-            <Image src="/img/city-night.svg" alt="" width={1920} height={150} priority />
+            <Image src="/img/city-night.webp" alt="" width={3840} height={702} sizes="100vw" />
           </div>
         </div>
 
