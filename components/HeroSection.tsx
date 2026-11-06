@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Menu, X, ArrowRight, Check } from "lucide-react";
 import { LANGS, LANG_META, type Dict, type Lang } from "@/lib/i18n";
 
-const ANCHORS = ["#skills", "#services", "#methode", "#faq"];
+const ANCHORS = ["#skills", "#methode", "#services", "#faq"];
 
 function LangSwitch({ lang, label, onPick }: { lang: Lang; label: string; onPick?: () => void }) {
   return (
@@ -78,7 +78,24 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
               </li>
             ))}
             <li className="flex flex-col justify-center mx-1">
-              <LangSwitch lang={lang} label={nav.langs} />
+              <details className="lang-menu">
+                <summary className="nav-link text-white" aria-label={nav.langs}>{nav.lang}</summary>
+                <ul>
+                  {LANGS.map((l) => (
+                    <li key={l}>
+                      <a
+                        href={LANG_META[l].href}
+                        hrefLang={LANG_META[l].htmlLang}
+                        lang={LANG_META[l].htmlLang}
+                        title={LANG_META[l].name}
+                        aria-current={l === lang ? "true" : undefined}
+                      >
+                        {LANG_META[l].label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </li>
             <li className="ms-6">
               <a href="#contact" className="btn hero-button my-4 red-button inline-flex items-center gap-2">
@@ -104,12 +121,12 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
                 </h1>
                 <p className="lead">{t.lead}</p>
                 <div className="flex justify-center lg:justify-start">
-                  <a href="#contact" className="btn hero-button my-4 red-button inline-flex items-center gap-2">
+                  <a href="#services" className="btn hero-button my-4 red-button inline-flex items-center gap-2">
+                    {t.secondary}
+                  </a>
+                  <a href="#contact" className="btn hero-button my-4 ms-2 lg:ms-4 light-button no-border inline-flex items-center gap-2">
                     {t.cta}
                     <ArrowRight size={18} className="rtl-flip" />
-                  </a>
-                  <a href="#services" className="btn hero-button my-4 ms-2 lg:ms-4 light-button inline-flex items-center gap-2">
-                    {t.secondary}
                   </a>
                 </div>
                 <ul className="trust">
@@ -126,13 +143,13 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
                 />
               </div>
 
-              <div className="flex flex-col items-center flex-1 lg:flex-[2] fade-in">
+              <div className="flex flex-col items-center lg:items-end flex-1 lg:flex-[2] fade-in">
                 <Image
                   className="text-center"
                   src="/img/hero-logo.webp"
-                  width={450}
-                  height={450}
-                  style={{ width: "85%", height: "auto" }}
+                  width={480}
+                  height={480}
+                  style={{ width: "92%", height: "auto" }}
                   alt=""
                   priority
                 />

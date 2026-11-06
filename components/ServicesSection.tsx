@@ -1,12 +1,12 @@
 import { Check, ArrowRight } from "lucide-react";
 import type { Dict } from "@/lib/i18n";
 
-// la 2e offre (site vitrine) est mise en avant
+// la 2e offre (site vitrine, au centre) est mise en avant
 const FEATURED = 1;
 
 export default function ServicesSection({ t }: { t: Dict["services"] }) {
   return (
-    <section className="section bg-night" id="services">
+    <section className="section bg-black" id="services">
       <div className="container relative">
         <div className="section-head">
           <span className="eyebrow">{t.eyebrow}</span>
