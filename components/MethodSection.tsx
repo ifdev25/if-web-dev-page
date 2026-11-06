@@ -2,11 +2,12 @@ import type { Dict } from "@/lib/i18n";
 
 export default function MethodSection({ t }: { t: Dict["method"] }) {
   return (
-    <section className="section bg-black" id="methode">
+    <section className="section bg-night" id="methode">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">{t.eyebrow}</span>
           <h2 className="text-white">{t.title}</h2>
+          <p className="lead">{t.lead}</p>
         </div>
 
         <ol className="steps">

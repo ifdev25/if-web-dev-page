@@ -13,7 +13,7 @@ export const LANG_META: Record<Lang, { href: string; label: string; name: string
 };
 
 /* Valeurs envoyées à l'API (app/api/contact/route.ts) : ne pas traduire, seuls les libellés changent. */
-export const PRESTATION_VALUES = ["Visuel ou Logo", "Site Vitrine", "Site E-commerce"] as const;
+export const PRESTATION_VALUES = ["Site Vitrine", "Site E-commerce", "Web app / App mobile"] as const;
 
 const fr = {
   meta: {
@@ -24,10 +24,11 @@ const fr = {
       "Votre image de marque propulsée. Site vitrine, boutique en ligne, logo et visuels sur mesure. Devis gratuit et sans engagement.",
   },
   nav: {
-    links: ["Approche", "Offres", "Méthode", "FAQ"],
+    links: ["Approche", "Méthode", "Offres", "FAQ"],
     cta: "Devis gratuit",
     menu: "Menu",
     langs: "Choisir la langue",
+    lang: "Langue",
   },
   hero: {
     eyebrow: "Sites web & identité visuelle · Artisans et PME",
@@ -62,22 +63,22 @@ const fr = {
     aria: "Demander un devis :",
     offers: [
       {
-        name: "Logo & visuels",
-        pitch: "Pour être reconnu au premier regard.",
-        price: "50 €",
-        items: ["Création de logo", "Flyers et affiches", "Cartes de visite", "Bannières et visuels réseaux sociaux", "Design moderne, 100 % sur mesure"],
+        name: "Boutique en ligne",
+        pitch: "Pour vendre vos produits 24 h/24.",
+        price: "900 €",
+        items: ["Boutique clé en main, facile à gérer", "Jusqu'à 20 produits intégrés", "Adaptée mobile, tablette et ordinateur", "Formulaire de contact", "Référencement (SEO) de base", "Hébergement configuré"],
       },
       {
         name: "Site vitrine",
         pitch: "Pour être trouvé et contacté en ligne.",
         price: "500 €",
-        items: ["1 à 5 pages, WordPress ou sur mesure", "Adapté mobile, tablette et ordinateur", "Formulaire de contact", "Référencement (SEO) de base", "Hébergement O2switch configuré", "Optimisation vitesse et performance"],
+        items: ["1 à 5 pages sur mesure", "Adapté mobile, tablette et ordinateur", "Formulaire de contact", "Référencement (SEO) de base", "Hébergement configuré", "Optimisation vitesse et performance"],
       },
       {
-        name: "Boutique en ligne",
-        pitch: "Pour vendre vos produits 24 h/24.",
-        price: "900 €",
-        items: ["Boutique WordPress + WooCommerce", "Jusqu'à 20 produits intégrés", "Adaptée mobile, tablette et ordinateur", "Formulaire de contact", "Référencement (SEO) de base", "Hébergement O2switch configuré"],
+        name: "Web app & app mobile",
+        pitch: "Pour digitaliser votre activité de A à Z.",
+        price: "2 000 €",
+        items: ["Application web sur mesure", "App mobile iOS et Android", "Espace client et connexion sécurisée", "Base de données et tableau de bord", "Design UI/UX sur mesure", "Publication App Store et Google Play"],
       },
     ],
     footnote:
@@ -86,6 +87,7 @@ const fr = {
   method: {
     eyebrow: "Méthode",
     title: "De l'idée au site en ligne, en 4 étapes",
+    lead: "Pour que ça fonctionne, des échanges réguliers et réactifs entre nous sont indispensables.",
     steps: [
       { title: "On échange", text: "Votre activité, vos clients, vos objectifs. Un premier contact gratuit pour cadrer le besoin." },
       { title: "Devis clair", text: "Un prix, un contenu et un délai fixés noir sur blanc avant de commencer. Pas de surprise." },
@@ -93,15 +95,14 @@ const fr = {
       { title: "Mise en ligne", text: "Hébergement, nom de domaine, référencement : je m'occupe de la technique, vous récoltez les contacts." },
     ],
   },
-  // ⚠ TÉMOIGNAGES FICTIFS (démonstration) : affichés en prod uniquement avec la mention `demo`.
+  // ⚠ TÉMOIGNAGES FICTIFS (démo client) : NE PAS mettre en prod tant que ce ne sont pas de vrais avis.
   // Publier de faux avis présentés comme réels = pratique commerciale trompeuse (Code de la consommation).
-  // Avec de vrais avis : remplacer `items` et supprimer `demo` dans les trois langues.
+  // Avec de vrais avis : remplacer `items` dans les trois langues.
   testimonials: {
     eyebrow: "Témoignages",
     title: "Ils m'ont fait confiance",
     lead: "Artisans, commerçants et PME : ce qu'ils retiennent de notre collaboration.",
     rating: "Note : 5 sur 5",
-    demo: "Exemples fictifs : cette section montre le rendu des avis clients, ce ne sont pas de vrais témoignages.",
     items: [
       { name: "Karim B.", role: "Plombier-chauffagiste, Lyon", quote: "Je n'avais aucun site. Trois semaines plus tard, j'avais un site propre et mes premiers appels via Google. Tout m'a été expliqué simplement." },
       { name: "Sophie M.", role: "Fleuriste, Annecy", quote: "Le logo et les cartes de visite ont changé l'image de ma boutique. Mes clientes m'en parlent encore." },
@@ -134,7 +135,7 @@ const fr = {
     prestation: "Prestation souhaitée",
     message: "Votre projet en quelques lignes",
     choose: "Choisissez une prestation",
-    prestations: ["Logo & visuels", "Site vitrine", "Boutique en ligne"],
+    prestations: ["Site vitrine", "Boutique en ligne", "Web app & app mobile"],
     errors: {
       nameMin: "Votre nom et prénom doivent faire au moins 2 caractères.",
       nameMax: "Votre nom et prénom ne doivent pas dépasser 50 caractères.",
@@ -149,7 +150,7 @@ const fr = {
   },
   footer: {
     sitemap: "Plan du site",
-    links: ["Approche", "Offres", "Méthode", "FAQ", "Contact"],
+    links: ["Approche", "Méthode", "Offres", "FAQ", "Contact"],
     social: "Autour du web",
     about: "À propos",
     aboutText:
@@ -172,10 +173,11 @@ const en: Dict = {
       "Your brand image, supercharged. Business website, online store, logo and custom visuals. Free, no-obligation quote.",
   },
   nav: {
-    links: ["Approach", "Pricing", "Process", "FAQ"],
+    links: ["Approach", "Process", "Pricing", "FAQ"],
     cta: "Free quote",
     menu: "Menu",
     langs: "Choose language",
+    lang: "Language",
   },
   hero: {
     eyebrow: "Websites & visual identity · Trades and small businesses",
@@ -206,22 +208,22 @@ const en: Dict = {
     aria: "Get a quote:",
     offers: [
       {
-        name: "Logo & visuals",
-        pitch: "Be recognised at first sight.",
-        price: "€50",
-        items: ["Logo design", "Flyers and posters", "Business cards", "Banners and social media visuals", "Modern, 100% custom design"],
+        name: "Online store",
+        pitch: "Sell your products 24/7.",
+        price: "€900",
+        items: ["Turnkey store, easy to manage", "Up to 20 products added", "Works on mobile, tablet and desktop", "Contact form", "Basic SEO", "Hosting set up"],
       },
       {
         name: "Business website",
         pitch: "Get found and contacted online.",
         price: "€500",
-        items: ["1 to 5 pages, WordPress or custom-built", "Works on mobile, tablet and desktop", "Contact form", "Basic SEO", "O2switch hosting set up", "Speed and performance optimisation"],
+        items: ["1 to 5 custom pages", "Works on mobile, tablet and desktop", "Contact form", "Basic SEO", "Hosting set up", "Speed and performance optimisation"],
       },
       {
-        name: "Online store",
-        pitch: "Sell your products 24/7.",
-        price: "€900",
-        items: ["WordPress + WooCommerce store", "Up to 20 products added", "Works on mobile, tablet and desktop", "Contact form", "Basic SEO", "O2switch hosting set up"],
+        name: "Web app & mobile app",
+        pitch: "Take your business fully digital.",
+        price: "€2,000",
+        items: ["Custom web application", "iOS and Android mobile app", "Client area with secure login", "Database and admin dashboard", "Custom UI/UX design", "App Store and Google Play release"],
       },
     ],
     footnote:
@@ -230,6 +232,7 @@ const en: Dict = {
   method: {
     eyebrow: "Process",
     title: "From idea to live website, in 4 steps",
+    lead: "For this to work, regular and responsive communication between us is essential.",
     steps: [
       { title: "We talk", text: "Your business, your customers, your goals. A free first call to scope what you need." },
       { title: "Clear quote", text: "Price, scope and timeline agreed in writing before we start. No surprises." },
@@ -242,7 +245,6 @@ const en: Dict = {
     title: "They trusted me",
     lead: "Tradespeople, shop owners and small businesses: what they remember from working together.",
     rating: "Rating: 5 out of 5",
-    demo: "Sample reviews: this section shows how client reviews will look, these are not real testimonials.",
     items: [
       { name: "Karim B.", role: "Plumber & heating engineer, Lyon", quote: "I had no website at all. Three weeks later I had a clean site and my first calls from Google. Everything was explained simply." },
       { name: "Sophie M.", role: "Florist, Annecy", quote: "The logo and business cards changed how my shop is seen. My customers still mention it." },
@@ -275,7 +277,7 @@ const en: Dict = {
     prestation: "Service needed",
     message: "Your project in a few lines",
     choose: "Choose a service",
-    prestations: ["Logo & visuals", "Business website", "Online store"],
+    prestations: ["Business website", "Online store", "Web app & mobile app"],
     errors: {
       nameMin: "Your full name must be at least 2 characters.",
       nameMax: "Your full name must not exceed 50 characters.",
@@ -290,7 +292,7 @@ const en: Dict = {
   },
   footer: {
     sitemap: "Sitemap",
-    links: ["Approach", "Pricing", "Process", "FAQ", "Contact"],
+    links: ["Approach", "Process", "Pricing", "FAQ", "Contact"],
     social: "Around the web",
     about: "About",
     aboutText:
@@ -311,10 +313,11 @@ const dz: Dict = {
       "نطلّعو الصورة تاع الماركة تاعك للفوق. سيت فيترين، بوتيك أونلاين، لوقو و فيزيال على المقاس. الدوفي بلاش و بلا التزام.",
   },
   nav: {
-    links: ["واش نقدملك", "العروض", "كيفاش نخدمو", "الأسئلة"],
+    links: ["واش نقدملك", "كيفاش نخدمو", "العروض", "الأسئلة"],
     cta: "دوفي بلاش",
     menu: "المنيو",
     langs: "اختار اللغة",
+    lang: "اللغة",
   },
   hero: {
     eyebrow: "سيتات ويب و هوية بصرية · للحرفيين و الشركات الصغيرة",
@@ -345,22 +348,22 @@ const dz: Dict = {
     aria: "اطلب دوفي:",
     offers: [
       {
-        name: "لوقو و فيزيال",
-        pitch: "باه يعرفوك من أول نظرة.",
-        price: "50 €",
-        items: ["تصميم لوقو", "فلايرز و أفيشات", "كروت فيزيت", "بانيرات و فيزيال للسوشيال ميديا", "ديزاين عصري، 100% على المقاس"],
+        name: "بوتيك أونلاين",
+        pitch: "باه تبيع السلعة تاعك 24/24.",
+        price: "900 €",
+        items: ["بوتيك واجدة، ساهلة في التسيير", "حتى 20 منتوج مدخّلين", "تمشي على التيليفون، التابلات و الكمبيوتر", "فورمولار تاع الاتصال", "SEO أساسي", "هيبرجمون مضبوط"],
       },
       {
         name: "سيت فيترين",
         pitch: "باه يلقاوك و يتواصلو معاك على الانترنت.",
         price: "500 €",
-        items: ["من 1 حتى 5 صفحات، WordPress ولا على المقاس", "يمشي على التيليفون، التابلات و الكمبيوتر", "فورمولار تاع الاتصال", "SEO أساسي", "هيبرجمون O2switch مضبوط", "تحسين السرعة و الأداء"],
+        items: ["من 1 حتى 5 صفحات على المقاس", "يمشي على التيليفون، التابلات و الكمبيوتر", "فورمولار تاع الاتصال", "SEO أساسي", "هيبرجمون مضبوط", "تحسين السرعة و الأداء"],
       },
       {
-        name: "بوتيك أونلاين",
-        pitch: "باه تبيع السلعة تاعك 24/24.",
-        price: "900 €",
-        items: ["بوتيك WordPress + WooCommerce", "حتى 20 منتوج مدخّلين", "تمشي على التيليفون، التابلات و الكمبيوتر", "فورمولار تاع الاتصال", "SEO أساسي", "هيبرجمون O2switch مضبوط"],
+        name: "ويب آب و تطبيق موبايل",
+        pitch: "باه تحوّل الخدمة تاعك للديجيتال من الأول للآخر.",
+        price: "2 000 €",
+        items: ["تطبيق ويب على المقاس", "تطبيق موبايل iOS و Android", "فضاء الزبون مع كونيكسيون آمنة", "قاعدة بيانات و داشبورد", "ديزاين UI/UX على المقاس", "نشر في App Store و Google Play"],
       },
     ],
     footnote:
@@ -369,6 +372,7 @@ const dz: Dict = {
   method: {
     eyebrow: "كيفاش نخدمو",
     title: "من الفكرة حتى السيت أونلاين، في 4 مراحل",
+    lead: "باه تمشي المليح، لازم نتواصلو بزاف و بسرعة بيناتنا.",
     steps: [
       { title: "نهدرو", text: "النشاط تاعك، الزبائن، الأهداف. أول اتصال بلاش باه نفهمو واش تحتاج." },
       { title: "دوفي واضح", text: "السعر، المحتوى و المدة مكتوبين بالأبيض و الأسود قبل ما نبداو. بلا مفاجآت." },
@@ -381,7 +385,6 @@ const dz: Dict = {
     title: "وثقو فيا",
     lead: "حرفيين، تجار و شركات صغيرة: واش قعدلهم من الخدمة معايا.",
     rating: "التقييم: 5 على 5",
-    demo: "أمثلة برك: هذا القسم يورّي كيفاش يبانو آراء الزبائن، ماشي آراء حقيقية.",
     items: [
       { name: "كريم ب.", role: "بلومبي، ليون", quote: "ما كانش عندي سيت. من بعد ثلاث سمانات، ولّى عندي سيت نقي و جاوني أول التيليفونات من Google. فهّمني كلش بالساهل." },
       { name: "صوفي م.", role: "بائعة ورد، أنسي", quote: "اللوقو و كروت الفيزيت بدّلو الصورة تاع الحانوت تاعي. الزبونات مازال يهدرولي عليهم." },
@@ -414,7 +417,7 @@ const dz: Dict = {
     prestation: "الخدمة اللي حاب",
     message: "المشروع تاعك في شوية سطور",
     choose: "اختار خدمة",
-    prestations: ["لوقو و فيزيال", "سيت فيترين", "بوتيك أونلاين"],
+    prestations: ["سيت فيترين", "بوتيك أونلاين", "ويب آب و تطبيق موبايل"],
     errors: {
       nameMin: "الاسم و اللقب لازم يكونو على الأقل 2 حروف.",
       nameMax: "الاسم و اللقب ما لازمش يفوتو 50 حرف.",
@@ -429,7 +432,7 @@ const dz: Dict = {
   },
   footer: {
     sitemap: "خريطة السيت",
-    links: ["واش نقدملك", "العروض", "كيفاش نخدمو", "الأسئلة", "اتصل بيا"],
+    links: ["واش نقدملك", "كيفاش نخدمو", "العروض", "الأسئلة", "اتصل بيا"],
     social: "على الويب",
     about: "شكون أنا",
     aboutText:

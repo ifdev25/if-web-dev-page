@@ -1,7 +1,7 @@
 import { Mail } from "lucide-react";
 import type { Dict } from "@/lib/i18n";
 
-const ANCHORS = ["#skills", "#services", "#methode", "#faq", "#contact"];
+const ANCHORS = ["#skills", "#methode", "#services", "#faq", "#contact"];
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">

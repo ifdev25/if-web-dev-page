@@ -18,9 +18,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <ScrollAnimationProvider />
       <HeroSection lang={lang} t={t.hero} nav={t.nav} />
       <SkillsSection t={t.skills} />
-      <ServicesSection t={t.services} />
       <MethodSection t={t.method} />
-      {/* Avis fictifs pour la démo, signalés par t.testimonials.demo. Pour retirer la
+      <ServicesSection t={t.services} />
+      {/* Avis fictifs pour la démo client : à remplacer par de vrais avis avant la prod. Pour retirer la
           section : la supprimer ici et repasser FAQ en bg-night, Contact en bg-black,
           Footer en bg-night. */}
       <TestimonialsSection t={t.testimonials} />

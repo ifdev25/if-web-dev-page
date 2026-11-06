@@ -311,11 +311,13 @@ a.nav-link:hover {
   margin-top: clamp(30px, 9.26vw - 3.33px, 50px);
 }
 .hero img {
-  max-width: 450px !important;
-  /* Recentrage du logo sur grand ecran : 0 jusqu a 1200px, -100px a partir de
-     1400px, lineaire entre les deux. Pas de !important, sinon cette regle
-     ecraserait le translate(-50%, -50%) de .mobile-banner. */
-  transform: translateX(clamp(-100px, 600px - 50vw, 0px));
+  max-width: 480px !important;
+  /* La fusee est calee sur le bord exterieur (lg:items-end, alignee sur le CTA
+     de la nav) et descend un peu : sa trainee pointe vers la ville. Pas de
+     !important, sinon cette regle ecraserait le translate(-50%, -50%) de
+     .mobile-banner. */
+  transform: translateY(8%) scale(1.1);
+  transform-origin: right center;
 }
 .hero h1 {
   /* Cran le plus haut de l echelle. 38px plancher (PROPULSEE ! tient dans
@@ -385,6 +387,17 @@ a.nav-link:hover {
   box-shadow: 0 0.375em 0 whitesmoke !important;
   color: whitesmoke !important;
   transition: background-color 0.3s ease !important;
+}
+/* bouton texte seul dans le hero : ni fond, ni bordure, ni ombre */
+.light-button.no-border,
+.light-button.no-border:hover {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+.light-button.no-border:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 .red-button:hover {
   background-color: #558abb !important;
@@ -1157,6 +1170,53 @@ footer .container {
 .lang-switch a[aria-current] {
   background-color: #c91414;
 }
+/* desktop : item LANG de la nav, avec dropdown natif <details> */
+.lang-menu {
+  position: relative;
+}
+.lang-menu summary {
+  display: block;
+  position: relative;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  transition: ease-in-out 0.3s;
+}
+.lang-menu summary::-webkit-details-marker {
+  display: none;
+}
+.lang-menu summary:hover::after,
+.lang-menu[open] summary::after {
+  width: 100%;
+  opacity: 1;
+}
+.lang-menu ul {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 0;
+  min-width: 100%;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  background-color: rgb(18 18 68 / 0.9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 8px;
+}
+.lang-menu ul a {
+  display: block;
+  padding: 6px 16px;
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+}
+.lang-menu ul a:hover {
+  background-color: rgb(255 255 255 / 0.12);
+}
+.lang-menu ul a[aria-current] {
+  background-color: #c91414;
+}
 /* menu mobile : fond clair, liens bleus */
 .wrapper-mobile .lang-switch {
   border-color: #4158d0;
@@ -1174,9 +1234,9 @@ footer .container {
 [dir="rtl"] .rtl-flip {
   transform: scaleX(-1);
 }
-/* le titre arabe est plus long : on annule le recentrage de la fusée, sinon elle mord dessus */
-[dir="rtl"] .hero img:not(.mobile-banner) {
-  transform: none;
+/* la fusée grossit depuis le bord extérieur, qui est à gauche en darija */
+[dir="rtl"] .hero img {
+  transform-origin: left center;
 }
 [dir="rtl"] .form-floating > label {
   left: auto;
@@ -1262,15 +1322,5 @@ footer .container {
 }
 .testimonial-author small {
   color: var(--muted);
-  font-size: var(--fs-sm);
-}
-/* mention « avis fictifs » : bien lisible, c'est elle qui rend la démo honnête */
-.demo-note {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 8px 16px;
-  border: 1px dashed #f5b301;
-  border-radius: 10px;
-  color: #f5b301;
   font-size: var(--fs-sm);
 }

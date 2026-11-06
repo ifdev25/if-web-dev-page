@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { checkRateLimit, getClientIp } from "./rate-limit";
+import { PRESTATION_VALUES } from "@/lib/i18n";
 
 // Équivalent du DefaultController + ContactFormType Symfony
 // Reçoit le formulaire, valide, et envoie l'e-mail via Resend
@@ -14,7 +15,7 @@ interface ContactPayload {
 
 // Même liste que le <select> du formulaire. On la revalide côté serveur :
 // la prestation part dans le sujet de l'e-mail, elle ne doit pas être libre.
-const PRESTATIONS = ["Visuel ou Logo", "Site Vitrine", "Site E-commerce"];
+const PRESTATIONS: readonly string[] = PRESTATION_VALUES;
 
 function validate(data: ContactPayload): string | null {
   if (!data.fullName || data.fullName.length < 2 || data.fullName.length > 50)
