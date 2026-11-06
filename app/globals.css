@@ -26,6 +26,8 @@ html {
     url('/fonts/GTWalsheimPro-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  /* texte visible tout de suite dans la police de secours, sans attendre le woff2 */
+  font-display: swap;
 }
 
 :root {
@@ -994,10 +996,12 @@ footer .container {
 .offer-price {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
   gap: 8px;
   color: var(--muted);
 }
 .offer-price strong {
+  white-space: nowrap;
   font-size: var(--fs-h1);
   line-height: 1;
   color: #fff;
@@ -1233,6 +1237,15 @@ footer .container {
 /* ---- Version darija (dir="rtl") : ce qui ne se retourne pas tout seul ---- */
 [dir="rtl"] .rtl-flip {
   transform: scaleX(-1);
+}
+/* le logo reste à gauche dans la nav, les liens passent à droite */
+[dir="rtl"] .site-nav .logo {
+  order: 1;
+  /* seul élément sur mobile (liens masqués) : sans ça il resterait à droite, sous le hamburger */
+  margin-inline-start: auto;
+}
+[dir="rtl"] .site-nav .container > ul {
+  margin-inline-start: 0;
 }
 /* la fusée grossit depuis le bord extérieur, qui est à gauche en darija */
 [dir="rtl"] .hero img {
