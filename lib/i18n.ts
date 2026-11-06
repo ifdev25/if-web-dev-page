@@ -446,7 +446,8 @@ const dz: Dict = {
 
 export const DICTS: Record<Lang, Dict> = { fr, en, dz };
 
-export const SITE = "https://www.if-web-dev.com";
+// domaine canonique : www.ifwebdev.com redirige ici (Vercel)
+export const SITE = "https://ifwebdev.com";
 
 export function pageMetadata(lang: Lang): Metadata {
   const t = DICTS[lang].meta;
