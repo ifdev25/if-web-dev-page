@@ -13,7 +13,7 @@ export const LANG_META: Record<Lang, { href: string; label: string; name: string
 };
 
 /* Valeurs envoyées à l'API (app/api/contact/route.ts) : ne pas traduire, seuls les libellés changent. */
-export const PRESTATION_VALUES = ["Site Vitrine", "Site E-commerce", "Web app / App mobile"] as const;
+export const PRESTATION_VALUES = ["Site Vitrine", "Site E-commerce", "App mobile", "Web app"] as const;
 
 const fr = {
   meta: {
@@ -135,7 +135,7 @@ const fr = {
     prestation: "Prestation souhaitée",
     message: "Votre projet en quelques lignes",
     choose: "Choisissez une prestation",
-    prestations: ["Site vitrine", "Boutique en ligne", "Web app & app mobile"],
+    prestations: ["Site vitrine", "E-commerce", "App mobile", "Web app"],
     errors: {
       nameMin: "Votre nom et prénom doivent faire au moins 2 caractères.",
       nameMax: "Votre nom et prénom ne doivent pas dépasser 50 caractères.",
@@ -277,7 +277,7 @@ const en: Dict = {
     prestation: "Service needed",
     message: "Your project in a few lines",
     choose: "Choose a service",
-    prestations: ["Business website", "Online store", "Web app & mobile app"],
+    prestations: ["Business website", "E-commerce", "Mobile app", "Web app"],
     errors: {
       nameMin: "Your full name must be at least 2 characters.",
       nameMax: "Your full name must not exceed 50 characters.",
@@ -417,7 +417,7 @@ const dz: Dict = {
     prestation: "الخدمة اللي حاب",
     message: "المشروع تاعك في شوية سطور",
     choose: "اختار خدمة",
-    prestations: ["سيت فيترين", "بوتيك أونلاين", "ويب آب و تطبيق موبايل"],
+    prestations: ["سيت فيترين", "بوتيك أونلاين", "تطبيق موبايل", "ويب آب"],
     errors: {
       nameMin: "الاسم و اللقب لازم يكونو على الأقل 2 حروف.",
       nameMax: "الاسم و اللقب ما لازمش يفوتو 50 حرف.",
