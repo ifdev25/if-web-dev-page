@@ -50,7 +50,7 @@ const fr = {
     benefits: [
       { title: "Une image qui vous ressemble", text: "Logo, couleurs, visuels : une identité cohérente et mémorable, sur votre site comme sur vos flyers." },
       { title: "Des sites rapides et modernes", text: "WordPress, Next.js ou Symfony selon votre besoin, avec l'IA pour livrer plus vite sans rogner sur la qualité." },
-      { title: "Des textes qui font agir", text: "Copywriting et référencement pensés pour transformer vos visiteurs en demandes de devis." },
+      { title: "Des applications prêtes à booster votre business", text: "Web app ou app mobile sur mesure, pensée pour votre activité et vos clients." },
     ],
   },
   services: {
@@ -195,7 +195,7 @@ const en: Dict = {
     benefits: [
       { title: "A look that feels like you", text: "Logo, colours, visuals: a consistent, memorable identity, on your website and on your flyers." },
       { title: "Fast, modern websites", text: "WordPress, Next.js or Symfony depending on your needs, with AI to deliver faster without cutting corners." },
-      { title: "Copy that drives action", text: "Copywriting and SEO designed to turn visitors into quote requests." },
+      { title: "Apps ready to boost your business", text: "Custom web or mobile app, built around your business and your customers." },
     ],
   },
   services: {
@@ -335,7 +335,7 @@ const dz: Dict = {
     benefits: [
       { title: "صورة تشبهلك", text: "لوقو، ألوان، فيزيال: هوية متناسقة تبقى في البال، في السيت تاعك و في الفلايرز." },
       { title: "سيتات سريعة و عصرية", text: "WordPress، Next.js ولا Symfony على حساب واش تحتاج، مع الذكاء الاصطناعي باه نسلّم أسرع بلا ما نقص من الجودة." },
-      { title: "كتابة تخلي الناس يتحركو", text: "كوبيرايتينغ و SEO مخدومين باه الزوار يوليو طلبات دوفي." },
+      { title: "تطبيقات واجدة باه تطلّع البيزنس تاعك", text: "ويب آب ولا تطبيق موبايل على المقاس، مخدوم على حساب الخدمة تاعك و الزبائن تاعك." },
     ],
   },
   services: {
