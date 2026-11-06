@@ -7,6 +7,11 @@ import { LANGS, LANG_META, type Dict, type Lang } from "@/lib/i18n";
 
 const ANCHORS = ["#skills", "#methode", "#services", "#faq"];
 
+// langue choisie à la main : prioritaire sur la détection par pays (middleware.ts)
+const rememberLang = (l: Lang) => {
+  document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`;
+};
+
 function LangSwitch({ lang, label, onPick }: { lang: Lang; label: string; onPick?: () => void }) {
   return (
     <div className="lang-switch" role="group" aria-label={label}>
@@ -18,7 +23,7 @@ function LangSwitch({ lang, label, onPick }: { lang: Lang; label: string; onPick
           lang={LANG_META[l].htmlLang}
           title={LANG_META[l].name}
           aria-current={l === lang ? "true" : undefined}
-          onClick={onPick}
+          onClick={() => { rememberLang(l); onPick?.(); }}
         >
           {LANG_META[l].label}
         </a>
@@ -89,6 +94,7 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
                         lang={LANG_META[l].htmlLang}
                         title={LANG_META[l].name}
                         aria-current={l === lang ? "true" : undefined}
+                        onClick={() => rememberLang(l)}
                       >
                         {LANG_META[l].label}
                       </a>
