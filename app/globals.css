@@ -686,10 +686,10 @@ footer .container {
   .hero div:nth-child(2) {
     display: none !important;
   }
-  /* la colonne passe de 1/2 a pleine largeur : 50% ici = 100% d une demi
-     colonne, l image garde donc exactement la meme largeur rendue */
+  /* la colonne passe de 1/2 a pleine largeur : 75% ici = 1.5x la largeur
+     precedente (50%), l image est agrandie de 50% sur mobile */
   #contact img {
-    max-width: 50%;
+    max-width: 75%;
   }
 }
 

@@ -154,8 +154,8 @@ export default function ContactSection({ t }: { t: Dict["contact"] }) {
             </form>
           </div>
 
-          {/* Image laptop */}
-          <div className="w-full lg:w-1/2 flex justify-center items-center slide-in from-right">
+          {/* Image laptop — sur mobile, meme respiration au-dessus qu'en dessous (padding-bottom de #contact) */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center slide-in from-right mt-[100px] lg:mt-0">
             <Image className="w-3/4" src="/img/laptop_form_3.webp" width={500} height={400} loading="lazy" alt="" />
           </div>
         </div>
