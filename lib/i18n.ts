@@ -462,9 +462,9 @@ export function pageMetadata(lang: Lang): Metadata {
       url,
       title: t.title,
       description: t.ogDescription,
-      images: [{ url: `${SITE}/og/og-${lang}.jpg`, width: 1200, height: 630, alt: t.title }],
+      images: [{ url: `${SITE}/og/og-${lang}.jpg?v=2`, width: 1200, height: 630, alt: t.title }],
     },
-    twitter: { card: "summary_large_image", title: t.title, description: t.ogDescription, images: [`${SITE}/og/og-${lang}.jpg`] },
+    twitter: { card: "summary_large_image", title: t.title, description: t.ogDescription, images: [`${SITE}/og/og-${lang}.jpg?v=2`] },
     alternates: {
       canonical: url,
       languages: { fr: `${SITE}/`, en: `${SITE}/en`, "ar-DZ": `${SITE}/dz`, "x-default": `${SITE}/` },
