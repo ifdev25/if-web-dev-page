@@ -64,7 +64,8 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
             <li key={l.href}><a href={l.href} onClick={closeMenu}>{l.label}</a></li>
           ))}
           <li><a href="#contact" onClick={closeMenu}>{nav.cta}</a></li>
-          <li><LangSwitch lang={lang} label={nav.langs} onPick={closeMenu} /></li>
+          {/* Pas de sélecteur de langue sur la version darija (/dz). */}
+          {lang !== "dz" && <li><LangSwitch lang={lang} label={nav.langs} onPick={closeMenu} /></li>}
         </ul>
       </div>
 
@@ -90,27 +91,30 @@ export default function HeroSection({ lang, t, nav }: { lang: Lang; t: Dict["her
                 <a className="nav-link text-white" href={l.href}>{l.label}</a>
               </li>
             ))}
-            <li className="flex flex-col justify-center mx-1">
-              <details className="lang-menu">
-                <summary className="nav-link text-white" aria-label={nav.langs}>{nav.lang}</summary>
-                <ul>
-                  {LANGS.map((l) => (
-                    <li key={l}>
-                      <a
-                        href={LANG_META[l].href}
-                        hrefLang={LANG_META[l].htmlLang}
-                        lang={LANG_META[l].htmlLang}
-                        title={LANG_META[l].name}
-                        aria-current={l === lang ? "true" : undefined}
-                        onClick={() => rememberLang(l)}
-                      >
-                        {LANG_META[l].label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </li>
+            {/* Pas de sélecteur de langue sur la version darija (/dz). */}
+            {lang !== "dz" && (
+              <li className="flex flex-col justify-center mx-1">
+                <details className="lang-menu">
+                  <summary className="nav-link text-white" aria-label={nav.langs}>{nav.lang}</summary>
+                  <ul>
+                    {LANGS.map((l) => (
+                      <li key={l}>
+                        <a
+                          href={LANG_META[l].href}
+                          hrefLang={LANG_META[l].htmlLang}
+                          lang={LANG_META[l].htmlLang}
+                          title={LANG_META[l].name}
+                          aria-current={l === lang ? "true" : undefined}
+                          onClick={() => rememberLang(l)}
+                        >
+                          {LANG_META[l].label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            )}
             <li className="ms-6">
               <a href="#contact" className="btn hero-button my-4 red-button inline-flex items-center gap-2">
                 {nav.cta}
